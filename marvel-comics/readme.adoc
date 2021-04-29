@@ -1,0 +1,61 @@
+:readme:
+:sectnums:
+:img: ./img
+
+= marvel-api-import
+
+"Data provided by Marvel. © 2014 Marvel"
+
+This repository is to crawl the `developer.marvel.com` API and retrieve Marvel characters, comics, creators, events, series, and stories data they have published.
+Our particular use is to retrieve the data from the API and convert it to JSON-formatted flat files for consistent and easy ingestion into other sources - in my personal case, Neo4j graph database.
+I want to use this data for analysis to find the connections and relationships between the entities in this dataset and encourage others to analyze it for themselves.
+
+Retrieval of this data requires proper attribution for use, and it requires an individual API key that is granted via access request and a user account.
+Steps for this process are included below.
+
+== Requesting an API key
+
+Users interested in following this process for themselves and pulling the data into JSON files can do so with the following steps:
+
+1. Go to https://developer.marvel.com/[developer.marvel.com/^] and create an account.
+2. Under the main page header, you should see a white menu bar with `Developer Portal` and a list of links. Choose the `Get a Key` option. This option also shows up on the right side of another white menu bar beneath the central image.
+image:{img}/marvel_dev_portal.png[]
+3. Fill out the request to receive an API key to access the data and interactive documentation.
+4. Once approved, start trying it out! Marvel has good interactive documentation that is very helpful to see what parameters and requests look like, as well as what data comes back and the result formatting.
+
+You can go to the `My Developer Account` option in the `Developer Portal` menu and see your public and private API keys, as well as the limits and domains.
+Be sure to think and plan carefully how to retrieve the data based on result limits and rate limits!
+This is very tricky.
+
+== Entity amounts
+
+Current existing entity counts from the API are listed here to help others plan retrieval and limits:
+
+[opts=header]
+|===
+h|Entity       |  Count
+|*Characters:* |   1493
+|*Comics:*     |  46410
+|*Creators:*   |   5304
+|*Events:*     |     75
+|*Series:*     |  11623
+|*Stories:*    | 107867
+|===
+
+== Executing the script
+
+I have set up the `import-neo4j-json.py` script in this repository to handle importing the data.
+There are functions to retrieve each entity type from the API and dump the data to separate json files.
+To get the data, you can call the script using `python3 import-neo4j-json.py <function_name>` and subsitute each retrieve_<entity> function at the end.
+
+`python3 import-neo4j-json.py retrieve_characters`
+`python3 import-neo4j-json.py retrieve_comics`
+
+You may notice that I use the characters.json or comics.json files as a base to call some of the other data.
+This is because I want to include the JOINs (or relationships) between the entities and because of the data limits in some of the API results.
+
+== Using the data
+
+As Marvel requests in its documentation and in granting an API key, please attribute the source of the data and give credit where credit is due.
+Hope you enjoy exploring this data as much as I have solving how to load it.
+Happy importing!
