@@ -21,3 +21,7 @@ Process to clean the data and cut down to demo size was as follows:
 2. Quote every field in the CSV (avoids misreading in-field commas as delimiter) using https://csvkit.readthedocs.io/en/latest/tutorial/4_going_elsewhere.html#csvformat-for-legacy-systems[`csvformat`^].
 3. Trim out unwanted CSV columns (original is 404 columns) using https://csvkit.readthedocs.io/en/latest/tutorial/1_getting_started.html#csvcut-data-scalpel[`csvcut`^].
 4. (If needed), re-add quotes around ever field using `csvformat`.
+
+== Presentation
+
+PDF version of the https://speakerdeck.com/jmhreif/graph-databases-solving-business-problems-with-connected-data[accompanying presentation^] is published to SpeakerDeck.
