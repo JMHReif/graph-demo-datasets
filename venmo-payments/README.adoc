@@ -1,0 +1,23 @@
+= Venmo API graph data import
+
+_NOTE: Due to the size of the data files, you will need `git-lfs` installed to clone this repository. You can install the tool via homebrew and other package managers, or you can download the library. For more details, see Github’s https://git-lfs.github.com/[page] for information on git-lfs._
+
+Data is from 2018, copied from the CSV in https://github.com/sa7mon/venmo-data[this Github repository^].
+
+Right now, this repository includes a demo-sized version of this data set. The demo size is ready-to-use. Plan to include larger data set load sizes in future commits.
+
+== Data Set
+
+In the main repo folder here, we have this README, plus a few other files. The `header-columns-names` file lists all of the header column names for the original file. As the file shows, the original file holds 404 columns! The `venmo.csv` (compressed to .zip file) is the full, unedited CSV of Venmo data. None of the data has been edited or cleaned in that file - it is the raw original from the Github repository linked above.
+
+The `venmo_demo.csv` file is the actual demo data set in CSV format. This can be loaded into Neo4j using Cypher, APOC, or another tool. I have also included the load script to import the data to Neo4j, as well as a file that contains sample queries to run on the demo data once it is loaded.
+
+== Process to Demo File
+
+CSV file has been cleaned and trimmed down to a manageable demo size (approximately 29,000 nodes and 30,000 relationships in Neo4j). This can be loaded on a smaller local, cloud, or Sandbox instance for early exploring or demoing to audiences.
+
+Process to clean the data and cut down to demo size was as follows:
+1. Trim full-size (7 million row) file down to first 1,000 rows using `head` command.
+2. Quote every field in the CSV (avoids misreading in-field commas as delimiter) using https://csvkit.readthedocs.io/en/latest/tutorial/4_going_elsewhere.html#csvformat-for-legacy-systems[`csvformat`^].
+3. Trim out unwanted CSV columns (original is 404 columns) using https://csvkit.readthedocs.io/en/latest/tutorial/1_getting_started.html#csvcut-data-scalpel[`csvcut`^].
+4. (If needed), re-add quotes around ever field using `csvformat`.

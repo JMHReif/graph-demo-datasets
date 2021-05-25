@@ -1,0 +1,13 @@
+= Graph Demo Datasets
+
+This repository is designed to contain small to large data sets that can be imported and explored in a graph database (specifically, Neo4j).
+
+Each folder in this root directory contains files and/or scripts needed to load the data into the database. Some may also contain sample Cypher queries or demo information. Below is the list of current data sets.
+
+1. Classical music - pulled from https://github.com/openopus-org/openopus_api[OpenOpus API^].
+2. Java versions (in progress) - pulled from https://github.com/marchof/java-almanac[Java Almanac Data^].
+3. Lord of the Rings (LOTR) movies/cast - pulled from https://www.themoviedb.org/documentation/api?language=en-US[The Movie DB API^].
+4. Marvel comics (subset) - pulled from the https://developer.marvel.com/[Marvel API^]. Due to rate-limiting, pulling full data set is not possible without several days of processing.
+5. Venmo payments (deprecated) - pulled from existing https://github.com/sa7mon/venmo-data[Github repository dump^] someone published before Venmo closed their API.
+
+Do enjoy and let me know via Github issues or pull requests if you would like to see other data sets added or if one needs fixed. Happy coding! :)
