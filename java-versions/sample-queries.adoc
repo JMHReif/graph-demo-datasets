@@ -1,0 +1,40 @@
+= Example demo queries
+
+[source,cypher]
+----
+//View data model
+CALL apoc.meta.graph;
+----
+
+[source,cypher]
+----
+//View graph of versions and diffs
+MATCH (jdk:JavaVersion)--(diff:VersionDiff)--(jdk2:JavaVersion)
+RETURN *;
+----
+
+[source,cypher]
+----
+//Find number of diffs between vendors
+MATCH (diff:VersionDiff)
+RETURN diff.fromVendor, diff.toVendor, count(*) as vendorCount
+ORDER BY vendorCount DESC;
+----
+
+[source,cypher]
+----
+//Find which packages/modules changed most
+MATCH (diff:VersionDiff)-[r:CONTAINS]-(change)
+WHERE change:Module OR change:Package
+RETURN change.name as name, count(*) as count
+ORDER BY count DESC;
+----
+
+[source,cypher]
+----
+//Find which packages/modules changed least
+MATCH (diff:VersionDiff)-[r:CONTAINS]-(change)
+WHERE change:Module OR change:Package
+RETURN change.name as name, count(*) as count
+ORDER BY count ASC;
+----

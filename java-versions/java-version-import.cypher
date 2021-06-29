@@ -11,10 +11,20 @@ CALL apoc.periodic.iterate('UNWIND $versions as version RETURN version',
     YIELD value
     MERGE (j:JavaVersion {version: value.version})
      ON CREATE SET j.name = value.name, j.codeName = value.codename, 
-     j.gaDate = date(apoc.date.convertFormat(value.ga,"yyyy/MM/dd","iso_date")), j.eolDate = date(apoc.date.convertFormat(value.eol,"yyyy/MM/dd","iso_date")),
+     j.gaDate = date(apoc.date.convertFormat(value.ga,"yyyy/MM/dd","iso_date")),
      j.status = value.status, j.bytecode = value.bytecode, j.vmSpec = value.documentation.vm, 
      j.languageSpec = value.documentation.lang, j.apiSpec = value.documentation.api 
-    WITH value, j 
+    WITH value, j
+    WHERE value.eol IS NOT NULL
+    WITH value, j, trim(split(value.eol, "(")[0]) as dateString
+    WITH value, j, dateString, split(dateString,"/") as dateParts
+    WITH value, j, dateString, (CASE
+        WHEN size(dateString) = 7 THEN date({year: toInteger(dateParts[0]), month: toInteger(dateParts[1])})
+        WHEN size(dateString) = 10 THEN date({year: toInteger(dateParts[0]), month: toInteger(dateParts[1]), day: toInteger(dateParts[2])})
+        ELSE date(dateString)
+        END) as eolDate
+     SET j.eolDate = eolDate
+    WITH value, j
     WHERE value.scm IS NOT NULL 
     UNWIND value.scm as scm 
     MERGE (s:SourceCode {type: scm.type}) 
