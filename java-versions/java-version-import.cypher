@@ -113,4 +113,4 @@ CALL apoc.periodic.iterate('MATCH (j:JavaVersion)
 YIELD batches, total, timeTaken, committedOperations, failedOperations, failedBatches , retries, errorMessages , batch , operations, wasTerminated
 RETURN batches, total, timeTaken, committedOperations, failedOperations, failedBatches , retries, errorMessages , batch , operations, wasTerminated;
 //Total nodes: 9108
-//Total rels: 55694
+//Total rels: 27847
