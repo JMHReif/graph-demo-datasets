@@ -24,4 +24,7 @@ Process to clean the data and cut down to demo size was as follows:
 
 == Presentation
 
-PDF version of the https://speakerdeck.com/jmhreif/graph-databases-solving-business-problems-with-connected-data[accompanying presentation^] is published to SpeakerDeck.
+PDF versions of accompanying presentations are published to SpeakerDeck.
+
+* https://speakerdeck.com/jmhreif/graph-databases-solving-business-problems-with-connected-data[Graph Databases: Solving Business Problems with Connected Data^]
+* https://speakerdeck.com/jmhreif/pouring-coffee-into-the-matrix-building-java-applications-on-neo4j[Pouring Coffee into the Matrix: Building Java Applications on Neo4j^]
