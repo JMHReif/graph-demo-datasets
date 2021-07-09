@@ -1,5 +1,5 @@
 //Create Applications, Payments and connect with relationship
-LOAD CSV WITH HEADERS FROM 'file:///venmo_demo.csv' AS line
+LOAD CSV WITH HEADERS FROM 'https://raw.githubusercontent.com/JMHReif/graph-demo-datasets/main/venmo-payments/venmo_demo.csv' AS line
 MERGE (app:Application {applicationId: line.`app.id`})
 ON CREATE SET app.name = line.`app.name`, app.description = line.`app.description`, app.imageURL = line.`app.image_url`
 WITH line, app
@@ -10,7 +10,7 @@ MERGE (pay)-[r2:PAID_USING]->(app)
 RETURN count(*);
 
 //Create paying User, find loaded Payment and connect with relationship
-LOAD CSV WITH HEADERS FROM 'file:///venmo_demo.csv' AS line
+LOAD CSV WITH HEADERS FROM 'https://raw.githubusercontent.com/JMHReif/graph-demo-datasets/main/venmo-payments/venmo_demo.csv' AS line
 MERGE (from:User {userId: line.`payment.actor.id`})
 ON CREATE SET from.isBlocked = line.`payment.actor.is_blocked`, from.dateJoined = datetime(line.`payment.actor.date_joined`), from.about = line.`payment.actor.about`, from.displayName = line.`payment.actor.display_name`, from.firstName = line.`payment.actor.firstName`, from.lastName = line.`payment.actor.last_name`, from.profilePicURL = line.`payment.actor.profile_picture_url`, from.isGroup = line.`payment.actor.is_group`, from.username = line.`payment.actor.username`
 WITH line, from
@@ -19,7 +19,7 @@ MERGE (from)-[r:SENDS]->(pay)
 RETURN count(*);
 
 //Create paid User, find loaded Payment and connect with relationship
-LOAD CSV WITH HEADERS FROM 'file:///venmo_demo.csv' AS line
+LOAD CSV WITH HEADERS FROM 'https://raw.githubusercontent.com/JMHReif/graph-demo-datasets/main/venmo-payments/venmo_demo.csv' AS line
 MERGE (to:User {userId: coalesce(line.`payment.target.user.id`, 'unknown')})
 ON CREATE SET to.firstName = line.`payment.target.user.first_name`, to.dateJoined = CASE WHEN coalesce(line.`payment.target.user.date_joined`,"") = "" THEN null ELSE datetime(line.`payment.target.user.date_joined`) END, to.isGroup = line.`payment.target.user.is_group`, to.lastName = line.`payment.target.user.last_name`, to.isActive = line.`payment.target.user.is_active`, to.isBlocked = line.`payment.target.user.is_blocked`, to.profilePicURL = line.`payment.target.user.profile_picture_url`, to.about = line.`payment.target.user.about`, to.username = line.`payment.target.user.username`, to.displayName = line.`payment.target.user.display_name`
 WITH line, to
