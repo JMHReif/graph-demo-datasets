@@ -72,7 +72,7 @@ CALL apoc.periodic.iterate('MATCH (j:JavaVersion)
     WITH value, start, prev
     MERGE (d:VersionDiff {fromVersion: value.base.version, toVersion: value.target.version}) 
      ON CREATE SET d.fromVendor = value.base.vendor, d.toVendor = value.target.vendor
-    MERGE (start)-[r:NEWER]->(d)<-[r2:OLDER]-(prev)
+    MERGE (start)-[r:FROM_NEWER]->(d)<-[r2:FROM_OLDER]-(prev)
     RETURN count(*)', {batchSize: 500, iterateList:false})
 YIELD batches, total, timeTaken, committedOperations, failedOperations, failedBatches , retries, errorMessages , batch , operations, wasTerminated
 RETURN batches, total, timeTaken, committedOperations, failedOperations, failedBatches , retries, errorMessages , batch , operations, wasTerminated;
