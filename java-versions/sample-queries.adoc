@@ -8,6 +8,40 @@ CALL apoc.meta.graph;
 
 [source,cypher]
 ----
+//Find active versions
+MATCH (v:JavaVersion)
+WHERE v.status <> 'EOL'
+RETURN v;
+----
+
+[source,cypher]
+----
+//Find current released versions
+MATCH (v:JavaVersion)
+WHERE date(v.gaDate) < date() < date(v.eolDate)
+RETURN v;
+----
+
+[source,cypher]
+----
+//Find active version for specific date
+WITH date("2013-11-18") as myDate
+MATCH (v:JavaVersion)
+WHERE date(v.gaDate) < myDate < date(v.eolDate)
+RETURN v;
+----
+
+[source,cypher]
+----
+//Find how many upgrades from a version
+MATCH (j:JavaVersion {version: "8"})-[r:FROM_OLDER]->(d:VersionDiff)<-[r2:FROM_NEWER]-(o:JavaVersion)
+WHERE o.gaDate < date() AND o.status <> 'EOL'
+//alternative to above: WHERE date(o.gaDate) < date() < date(o.eolDate)
+RETURN o.version ORDER BY toFloat(o.version);
+----
+
+[source,cypher]
+----
 //View graph of versions and diffs
 MATCH (jdk:JavaVersion)--(diff:VersionDiff)--(jdk2:JavaVersion)
 RETURN *;
@@ -24,17 +58,42 @@ ORDER BY vendorCount DESC;
 [source,cypher]
 ----
 //Find which packages/modules changed most
-MATCH (diff:VersionDiff)-[r:CONTAINS]-(change)
-WHERE change:Module OR change:Package
-RETURN change.name as name, count(*) as count
+MATCH (diff:VersionDiff)-[r:HAS_DELTA]-(delta)
+WHERE delta:Module OR delta:Package
+RETURN delta.name as name, count(*) as count
 ORDER BY count DESC;
 ----
 
 [source,cypher]
 ----
 //Find which packages/modules changed least
-MATCH (diff:VersionDiff)-[r:CONTAINS]-(change)
-WHERE change:Module OR change:Package
-RETURN change.name as name, count(*) as count
+MATCH (diff:VersionDiff)-[r:HAS_DELTA]-(delta)
+WHERE delta:Module OR delta:Package
+RETURN delta.name as name, count(*) as count
 ORDER BY count ASC;
+----
+
+[source,cypher]
+----
+//Find which versions had changes in java.time package
+MATCH (n:Package)<-[r:HAS_DELTA*1..2]-(d:VersionDiff)<-[r2:FROM_NEWER]-(j:JavaVersion)
+WHERE n.name = 'java.time'
+RETURN DISTINCT(j.version) ORDER BY toFloat(j.version);
+----
+
+[source,cypher]
+----
+//Find which versions had changes to Date class, and which packages are affected
+MATCH p = (n:Class {name: 'Date'})<-[:HAS_DELTA*2..3]-(d:VersionDiff)<-[:FROM_NEWER]-(j:JavaVersion)
+RETURN DISTINCT(j.version), collect(DISTINCT[ node in nodes(p) where node:Package | node.name ])
+ORDER BY toFloat(j.version);
+----
+
+[source,cypher]
+----
+//Find changes from version 16 to 17
+MATCH (j:JavaVersion {version: "17"})-[r:FROM_NEWER]->(d:VersionDiff)<-[r2:FROM_OLDER]-(j2:JavaVersion {version: "16"})
+WITH d
+MATCH (d)-[r3:HAS_DELTA*1..4]->(delta)
+RETURN d, r3, delta;
 ----
