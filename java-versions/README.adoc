@@ -1,3 +1,7 @@
+:readme:
+:sectnums:
+:img: ./img
+
 = Java Versions and Diffs
 
 This is data is retrieved from the https://github.com/marchof/java-almanac[Java Almanac Github repository^]. Their repository is hosted as an https://javaalmanac.io/[interactive site^] for users to navigate. However, this project imports the data into a graph database (Neo4j) and explores the connections between versions and changes.
