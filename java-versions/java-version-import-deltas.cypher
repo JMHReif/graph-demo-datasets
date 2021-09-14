@@ -3,6 +3,7 @@
 //Setup:
 CREATE INDEX java_version FOR (j:JavaVersion) ON (j.version);
 CREATE INDEX version_diff FOR (v:VersionDiff) ON (v.fromVersion, v.toVersion);
+CREATE INDEX delta FOR (d:Delta) ON (d.name);
 
 //Queries:
 //1) Load Java versions, along with related sources, features, and refs
@@ -98,7 +99,7 @@ WITH level1Delta, d
 CALL {
     WITH level1Delta, d
     WITH level1Delta, d
-    CALL apoc.merge.node([apoc.text.capitalize(level1Delta.type)], {name: level1Delta.name},{},{docURL: level1Delta.javadoc, status: level1Delta.status, tags: level1Delta.addedTags}) YIELD node as node1
+    CALL apoc.merge.node([apoc.text.capitalize(level1Delta.type),"Delta"], {name: level1Delta.name},{},{docURL: level1Delta.javadoc, status: level1Delta.status, tags: level1Delta.addedTags}) YIELD node as node1
 MERGE (d)-[r3:HAS_DELTA]->(node1)
 WITH level1Delta, node1
 WHERE level1Delta.deltas IS NOT NULL
@@ -107,7 +108,7 @@ WITH level2Delta, node1
 CALL {
     WITH level2Delta, node1
     WITH level2Delta, node1
-    CALL apoc.merge.node([apoc.text.capitalize(level2Delta.type)], {name: level2Delta.name},{},{docURL: level2Delta.javadoc, status: level2Delta.status, tags: level2Delta.addedTags}) YIELD node as node2
+    CALL apoc.merge.node([apoc.text.capitalize(level2Delta.type),"Delta"], {name: level2Delta.name},{},{docURL: level2Delta.javadoc, status: level2Delta.status, tags: level2Delta.addedTags}) YIELD node as node2
     WITH level2Delta, node1, node2 
     MERGE (node1)-[r4:HAS_DELTA]->(node2) 
     WITH level2Delta, node2
@@ -117,7 +118,7 @@ CALL {
     CALL {
         WITH level3Delta, node2
         WITH level3Delta, node2
-        CALL apoc.merge.node([apoc.text.capitalize(level3Delta.type)], {name: level3Delta.name},{},{docURL: level3Delta.javadoc, status: level3Delta.status, tags: level3Delta.addedTags}) 
+        CALL apoc.merge.node([apoc.text.capitalize(level3Delta.type),"Delta"], {name: level3Delta.name},{},{docURL: level3Delta.javadoc, status: level3Delta.status, tags: level3Delta.addedTags}) 
         YIELD node as node3
         WITH level3Delta, node2, node3 
         MERGE (node2)-[r5:HAS_DELTA]->(node3)
