@@ -1,0 +1,47 @@
+= Example demo queries
+
+[source,cypher]
+----
+//Find number of crewmate vs imposter characters
+MATCH (c:Character)
+RETURN c.teamAssigned, count(c);
+----
+
+[source,cypher]
+----
+//Find most games per session (same region and game code)
+MATCH (s:GameSession)-[r]->(g:Game)
+WHERE size((s)-[:INCLUDES]-(:Game)) > 1
+RETURN DISTINCT s.region, s.gameCode, count(g) as count
+ORDER BY count DESC;
+----
+
+[source,cypher]
+----
+//Find most popular region
+MATCH (s:GameSession)-[r]->(g:Game)
+WHERE size((s)-[:INCLUDES]-(:Game)) > 1
+RETURN DISTINCT s.region, count(g) as count
+ORDER BY count DESC;
+----
+
+[source,cypher]
+----
+//Find user with most wins and tasks completed
+MATCH (u:User)-[r:JOINS]->(s:GameSession)-[r2:INCLUDES]->(g:Game)-[r3:HAS_PARTICIPANT]->(c:Character)
+WHERE c.allTasksCompleted = "Yes"
+AND c.outcome = "Win"
+RETURN u.name, count(c) as count
+ORDER BY count DESC
+----
+
+
+//ERRORING
+// [source,cypher]
+// ----
+// //Find percent of crewmate vs imposter by user
+// MATCH (u:User)-[r:JOINS]->(s:GameSession)-[r2:INCLUDES]->(g:Game)-[r3:HAS_PARTICIPANT]->(c:Character)
+// WITH u.name as user, count(c) as totalPlayed, collect(c.teamAssigned) as roles
+// RETURN user, totalPlayed, reduce(r=0,role in roles | CASE role WHEN "Crewmate" THEN r+1 ELSE r END);
+// ORDER BY totalPlayed DESC;
+// ----

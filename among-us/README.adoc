@@ -1,0 +1,11 @@
+:readme:
+:sectnums:
+:img: ./img
+
+= Among Us - Kaggle
+
+This is data is retrieved from https://www.kaggle.com/ruchi798/among-us-dataset[Ruchi Bhatia's Kaggle repository^]. This project imports the data into a graph database (Neo4j) and explores the connections between entities shown in the data model below.
+
+== Data Model
+
+image:{img}/among-us-data-model.png[]
