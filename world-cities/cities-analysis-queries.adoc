@@ -1,0 +1,44 @@
+//See data model
+CALL apoc.meta.graph();
+
+//Return subgraph of city and connections (can choose any city)
+MATCH (c:City {name: 'Saint Louis'})-[rel]-(other)
+RETURN * LIMIT 50;
+
+//Find countries with most cities
+MATCH (c:Country)<-[r:IN]-(t:City)
+RETURN c.name as country, count(t) as count, collect(t.name) as cities
+ORDER BY count DESC
+LIMIT 20;
+
+//Find if countries with most cities contains more regions, too
+MATCH (c:Country)<-[r:IN]-(a:AdministrativeRegion)
+RETURN c.name as country, count(a) as count, collect(a.name) as regions
+ORDER BY count DESC
+LIMIT 20;
+
+//Find how many cities exist per region
+MATCH (a:AdministrativeRegion)<-[r:IN]-(c:City)
+RETURN a.name as region, count(c) as count, collect(c.name) as cities
+ORDER BY count DESC
+LIMIT 20;
+
+//Find groups of neighboring countries
+MATCH (c:Country)-[r:NEIGHBOR]->(oc:Country)
+RETURN c, r, oc;
+
+//Find 2 cities close together
+MATCH (c:City)-[h:hop]-(oc:City)
+WHERE 0.0 < h.distance < 100
+RETURN c, h, oc;
+
+//Find cities with population > 10,000,000 and related country
+MATCH (c:City)-[i:IN]->(o:Country)
+WHERE c.population > 10000000
+RETURN c, i, o;
+
+//Find countries that have more than 1 city with population > 10,000,000
+MATCH (c:City)-[i:IN]->(o:Country)
+WHERE c.population > 10000000
+AND size((o)<-[:IN]-(:City)) > 1
+RETURN c, i, o;
