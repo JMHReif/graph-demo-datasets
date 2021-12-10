@@ -39,7 +39,7 @@ MATCH (a:City)-[:IN]->(ca:Country), (b:City)-[:IN]->(cb:Country)
 WHERE id(a) < id(b)
 AND distance(a.location, b.location) < 10000
 WITH a, b, ca, cb
-MERGE (a)-[r:hop { distance: distance(a.location, b.location) }]->(b)
+MERGE (a)-[r:IS_CLOSE_TO { distance: distance(a.location, b.location) }]->(b)
 RETURN count(r);
 
 MATCH (a:City)-[:IN]->(ca:Country), (b:City)-[:IN]->(cb:Country)
@@ -47,7 +47,7 @@ WHERE id(a) < id(b)
 AND distance(a.location, b.location) < 10000
 AND id(ca) < id(cb)
 WITH a, b, ca, cb
-MERGE (ca)-[r:NEIGHBOR]->(cb)
+MERGE (ca)-[r:NEIGHBORS]->(cb)
 RETURN count(r);
 
 //4) Administrative units
