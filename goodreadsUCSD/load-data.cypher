@@ -1,4 +1,7 @@
 //NOTE: This script loads subset of full data set (based on 10k books)
+//Total loaded data size:
+//92162 nodes
+//84006 relationships
 
 CREATE CONSTRAINT FOR (b:Book) REQUIRE b.book_id IS UNIQUE;
 CREATE CONSTRAINT FOR (a:Author) REQUIRE a.author_id IS UNIQUE;
