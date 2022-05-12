@@ -4,7 +4,7 @@
 
 = Goodreads UCSD
 
-*Work in Progress!*
+*Note: Data will not fit on AuraDB Free instance (too large)*
 
 This data is sourced from the https://sites.google.com/eng.ucsd.edu/ucsdbookgraph/home?authuser=0[UCSD Book Graph project^], which contains JSON files of data from Goodreads with books, authors, reviews, users, and more.
 
@@ -14,3 +14,7 @@ Citations for the original creators of this material are included below:
 
 * Mengting Wan, Julian McAuley, "https://www.google.com/url?q=https%3A%2F%2Fgithub.com%2FMengtingWan%2Fmengtingwan.github.io%2Fraw%2Fmaster%2Fpaper%2Frecsys18_mwan.pdf&sa=D&sntz=1&usg=AOvVaw0HcX6gU1ENhk7fbCXXbCiy[Item Recommendation on Monotonic Behavior Chains^]", in RecSys'18. [https://www.google.com/url?q=https%3A%2F%2Fdblp.uni-trier.de%2Frec%2Fbibtex%2Fconf%2Frecsys%2FWanM18&sa=D&sntz=1&usg=AOvVaw2VTBdVH0HOCFqZJ3u3NsgZ[bibtex^]]
 * Mengting Wan, Rishabh Misra, Ndapa Nakashole, Julian McAuley, "https://www.google.com/url?q=https%3A%2F%2Fwww.aclweb.org%2Fanthology%2FP19-1248&sa=D&sntz=1&usg=AOvVaw1G1ZlQ7oe0NDtqeI8gN2Nf[Fine-Grained Spoiler Detection from Large-Scale Review Corpora^]", in ACL'19. [https://www.google.com/url?q=https%3A%2F%2Fdblp.uni-trier.de%2Frec%2Fbibtex%2Fconf%2Facl%2FWanMNM19&sa=D&sntz=1&usg=AOvVaw25f7_0XLwNzo6a9-Qa2jGv[bibtex]^]
+
+== Data Model
+
+image:{img}/goodreads-ucsd-data-model.png[]
