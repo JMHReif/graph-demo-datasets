@@ -1,10 +1,14 @@
 = Venmo API graph data import
 
-_NOTE: Due to the size of the data files, you will need `git-lfs` installed to clone this repository. You can install the tool via homebrew and other package managers, or you can download the library. For more details, see Github’s https://git-lfs.github.com/[page] for information on git-lfs._
+_NOTE: Due to the size of the data files, you will need `git-lfs` installed to clone this repository. You can install the tool via homebrew and other package managers, or you can download the library. For more details, see Github's https://git-lfs.github.com/[page] for information on git-lfs._
 
 Data is from 2018, copied from the CSV in https://github.com/sa7mon/venmo-data[this Github repository^].
 
 Right now, this repository includes a demo-sized version of this data set. The demo size is ready-to-use. Plan to include larger data set load sizes in future commits.
+
+== Data Model
+
+image:{img}/venmo-social-data-model.png[]
 
 == Data Set
 

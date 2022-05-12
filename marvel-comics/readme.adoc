@@ -13,6 +13,10 @@ I want to use this data for analysis to find the connections and relationships b
 Retrieval of this data requires proper attribution for use, and it requires an individual API key that is granted via access request and a user account.
 Steps for this process are included below.
 
+== Data Model
+
+image:{img}/marvel-comics-data-model.png[]
+
 == Requesting an API key
 
 Users interested in following this process for themselves and pulling the data into JSON files can do so with the following steps:
@@ -43,6 +47,8 @@ h|Entity       |  Count
 |===
 
 == Executing the script
+
+*Work In Progress! (not working yet)*
 
 I have set up the `import-neo4j-json.py` script in this repository to handle importing the data.
 There are functions to retrieve each entity type from the API and dump the data to separate json files.
