@@ -1,3 +1,7 @@
+:readme:
+:sectnums:
+:img: ./img
+
 = World city data
 
 The data is borrowed from my colleague's https://github.com/moxious/meetup-dataset[Github repository^]. Only the city, country, and region data is used from that repository (with some minor syntax tweaks and changes).
