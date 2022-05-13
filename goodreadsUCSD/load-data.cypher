@@ -8,14 +8,12 @@ CREATE CONSTRAINT FOR (a:Author) REQUIRE a.author_id IS UNIQUE;
 CREATE CONSTRAINT FOR (r:Review) REQUIRE r.review_id IS UNIQUE;
 
 //Load 10,000 books
-CALL apoc.periodic.iterate(
-'CALL apoc.load.json("https://data.neo4j.com/goodreads/goodreads_books_10k.json") YIELD value as book',
-'MERGE (b:Book {book_id: book.book_id}) SET b = book',
-{batchsize: 10000}
-);
+CALL apoc.load.json("https://data.neo4j.com/goodreads/goodreads_books_10k.json") YIELD value as book
+MERGE (b:Book {book_id: book.book_id})
+SET b += apoc.map.clean(book, ['authors'],[""]);
 //10000 Book nodes
 
-//Load authors from books
+//Import initial authors for 10k books
 CALL apoc.load.json("https://data.neo4j.com/goodreads/goodreads_books_10k.json") YIELD value as book
 WITH book
 UNWIND book.authors as author
@@ -25,7 +23,7 @@ MERGE (a:Author {author_id: author.author_id});
 //Hydrate Author nodes
 CALL apoc.periodic.iterate(
 'CALL apoc.load.json("https://data.neo4j.com/goodreads/goodreads_book_authors.json.gz") YIELD value as author',
-'WITH author MATCH (a:Author {author_id: author.author_id}) SET a = author',
+'WITH author MATCH (a:Author {author_id: author.author_id}) SET a += apoc.map.clean(author, [],[""])',
 {batchsize: 10000}
 );
 
@@ -42,7 +40,7 @@ MERGE (a)-[w:AUTHORED]->(b);
 //Load Reviews
 CALL apoc.periodic.iterate(
 'CALL apoc.load.json("https://data.neo4j.com/goodreads/goodreads_bookReviews_demo.json.gz") YIELD value as review',
-'WITH review MERGE (r:Review {review_id: review.review_id}) SET r = review',
+'WITH review MERGE (r:Review {review_id: review.review_id}) SET r += apoc.map.clean(review, [],[""])',
 {batchsize: 10000}
 );
 //69791 Review nodes
