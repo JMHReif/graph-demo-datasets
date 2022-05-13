@@ -10,7 +10,7 @@ CREATE CONSTRAINT FOR (r:Review) REQUIRE r.review_id IS UNIQUE;
 //Load 10,000 books
 CALL apoc.periodic.iterate(
 'CALL apoc.load.json("https://data.neo4j.com/goodreads/goodreads_books_10k.json") YIELD value as book',
-'MERGE (b:Book {book_id: book.book_id})',
+'MERGE (b:Book {book_id: book.book_id}) SET b = book',
 {batchsize: 10000}
 );
 //10000 Book nodes
