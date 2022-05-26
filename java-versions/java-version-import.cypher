@@ -6,7 +6,7 @@ CREATE INDEX version_diff FOR (v:VersionDiff) ON (v.fromVersion, v.toVersion);
 
 //Queries:
 //1) Load Java versions, along with related sources, features, and refs
-WITH [1.0,1.1,1.2,1.3,1.4,5,6,7,8,9,10,11,12,13,14,15,16,17,18] as versions
+WITH [1.0,1.1,1.2,1.3,1.4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19] as versions
 CALL apoc.periodic.iterate('UNWIND $versions as version RETURN version',
     'CALL apoc.load.json("https://raw.githubusercontent.com/marchof/java-almanac/master/site/data/jdk/versions/"+version+".json")
     YIELD value

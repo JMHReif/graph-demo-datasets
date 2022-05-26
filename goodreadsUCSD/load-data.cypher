@@ -38,19 +38,15 @@ MERGE (a)-[w:AUTHORED]->(b);
 //14215 AUTHORED relationships
 
 //Load Reviews
-CALL apoc.periodic.iterate(
-'CALL apoc.load.json("https://data.neo4j.com/goodreads/goodreads_bookReviews_demo.json.gz") YIELD value as review',
-'WITH review MERGE (r:Review {review_id: review.review_id}) SET r += apoc.map.clean(review, [],[""])',
-{batchsize: 10000}
-);
+:auto CALL apoc.load.json("https://data.neo4j.com/goodreads/goodreads_reviews_dedup.json.gz") YIELD value as review
+CALL { WITH review
+ MATCH (b:Book) WHERE b.book_id = review.book_id
+ WITH review, b
+ MERGE (r:Review {review_id: review.review_id}) SET r += apoc.map.clean(review, [],[""])
+ WITH b, r
+ MERGE (b)<-[rel:WRITTEN_FOR]-(r)
+} in transactions of 50000 rows;
 //69791 Review nodes
-
-//Load Review relationships
-CALL apoc.periodic.iterate(
-'CALL apoc.load.json("https://data.neo4j.com/goodreads/goodreads_reviewRels_demo.json.gz") YIELD value as rel',
-'WITH rel MATCH (r:Review {review_id: rel.review_id}) MATCH (b:Book {book_id: rel.book_id}) MERGE (r)-[wf:WRITTEN_FOR]->(b)',
-{batchsize: 10000}
-);
 //69791 WRITTEN_FOR relationships
 
 
