@@ -6,7 +6,7 @@ CREATE CONSTRAINT FOR (g:Genre) REQUIRE g.name IS UNIQUE;
 CREATE CONSTRAINT FOR (c:Country) REQUIRE c.iso2Code IS UNIQUE;
 
 //Load Productions
-LOAD CSV WITH HEADERS FROM "file:///titles.csv" as row
+LOAD CSV WITH HEADERS FROM "https://raw.githubusercontent.com/JMHReif/graph-demo-datasets/main/kaggle-netflix/titles.csv" as row
 CALL apoc.merge.node(["Production",apoc.text.capitalize(toLower(row.type))], {productionId: row.id}, {title: row.title, seasons: toFloat(row.seasons), releaseYear: date(row.release_year), description: row.description, runtime: toInteger(row.runtime), rating: row.age_certification, imdbId: row.imdb_id, imdbVotes: toFloat(row.imdb_votes), imdbScore: row.imdb_score, tmdbPopularity: row.tmdb_popularity, tmdbScore: row.tmdb_score}, {}) YIELD node as p
 WITH row, p
 CALL { 
@@ -33,13 +33,13 @@ CALL {
 RETURN count(*);
 
 //Load country names
-LOAD CSV WITH HEADERS FROM "file:///wikipedia-iso-country-codes.csv" as row
+LOAD CSV WITH HEADERS FROM "https://raw.githubusercontent.com/JMHReif/graph-demo-datasets/main/kaggle-netflix/wikipedia-iso-country-codes.csv" as row
 MATCH (c:Country {iso2Code: row.`Alpha-2 code`})
  SET c.name = row.`English short name lower case`
 RETURN count(*);
 
 //Load production people
-LOAD CSV WITH HEADERS FROM "file:///credits.csv" as row
+LOAD CSV WITH HEADERS FROM "https://raw.githubusercontent.com/JMHReif/graph-demo-datasets/main/kaggle-netflix/credits.csv" as row
 CALL apoc.merge.node(["Person",apoc.text.capitalize(toLower(row.role))], {personId: row.person_id}, {name: row.name}, {}) YIELD node as p
 WITH row, p
 CALL {
