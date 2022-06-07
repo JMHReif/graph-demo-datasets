@@ -106,5 +106,5 @@ CALL {
     MERGE (p)-[r:PLAYED]->(c) 
     WITH row, c
     MATCH (pr:Production {productionId: row.id})
-    MERGE (pr)-[r2:FEATURES]->(c)
+    MERGE (pr)-[r2:FEATURED]->(c)
 } IN TRANSACTIONS OF 10000 rows;
