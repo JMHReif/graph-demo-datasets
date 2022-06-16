@@ -1,4 +1,4 @@
-//WORK IN PROGRESS!
+//Kaggle Netflix with Wikipedia Countries Data Set
 
 //Create constraints
 CREATE CONSTRAINT FOR (p:Production) REQUIRE p.productionId IS UNIQUE;

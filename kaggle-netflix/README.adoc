@@ -1,3 +1,11 @@
+:readme:
+:sectnums:
+:img: ./img
+
 = Kaggle Netflix data set
 
-*WORK IN PROGRESS!*
+This is data is retrieved from the https://www.kaggle.com/datasets/victorsoeiro/netflix-tv-shows-and-movies[Kaggle Netflix data set^]. It has been complemented with a https://gist.github.com/radcliff/f09c0f88344a7fcef373[Wikipedia country name CSV^]. This project imports the data into a graph database (Neo4j) and explores the connections between movies/tv shows, people (actors, directors, characters), countries, and other entities.
+
+== Data Model
+
+image:{img}/kaggle-netflix-data-model.png[]
