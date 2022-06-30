@@ -45,7 +45,7 @@ CALL { WITH review
  MERGE (r:Review {review_id: review.review_id}) SET r += apoc.map.clean(review, [],[""])
  WITH b, r
  MERGE (b)<-[rel:WRITTEN_FOR]-(r)
-} in transactions of 50000 rows;
+} in transactions of 20000 rows;
 //69791 Review nodes
 //69791 WRITTEN_FOR relationships
 
