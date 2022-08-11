@@ -1,0 +1,11 @@
+:readme:
+:sectnums:
+:img: ./img
+
+= Coffee Shop
+
+This data is sourced from the https://www.kaggle.com/datasets/ylchang/coffee-shop-sample-data-1113[Kaggle Coffee Shop sample data^], which contains CSV files of products, inventory, sales, staff, and more.
+
+== Data Model
+
+image:{img}/coffee-shop-data-model.png[]

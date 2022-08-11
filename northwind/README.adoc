@@ -1,0 +1,11 @@
+:readme:
+:sectnums:
+:img: ./img
+
+= Northwind
+
+This data is sourced from the https://github.com/neo4j-graph-examples/northwind[Neo4j Graph Examples repository^], which contains CSV files of products, categories, suppliers, customers, and more.
+
+== Data Model
+
+image:{img}/northwind-data-model.png[]
