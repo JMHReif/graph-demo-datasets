@@ -8,8 +8,8 @@ CREATE CONSTRAINT FOR (b:Building) REQUIRE b.buildingId IS UNIQUE;
 CREATE CONSTRAINT FOR (s:Staff) REQUIRE s.staffId IS UNIQUE;
 CREATE CONSTRAINT FOR (o:Order) REQUIRE o.orderId IS UNIQUE;
 
-//Load products, groups, categories
-LOAD CSV WITH HEADERS FROM "https://raw.githubusercontent.com/JMHReif/graph-demo-datasets/main/coffee-shop/products.csv" AS row
+//Load products, types, categories, groups
+LOAD CSV WITH HEADERS FROM "https://raw.githubusercontent.com/JMHReif/graph-demo-datasets/main/coffee-shop/product.csv" AS row
 WITH row
 CALL { 
     WITH row
@@ -21,7 +21,7 @@ CALL {
         p.retailPrice = row.current_retail_price,
         p.taxExempt = row.tax_exempt_yn,
         p.promo = row.promo_yn,
-        p.newProduct = row.new_product_yn;
+        p.newProduct = row.new_product_yn
     RETURN p
 }
 WITH row, p
@@ -31,22 +31,19 @@ CALL {
     MERGE (t:Type {type: row.product_type})
     MERGE (p)-[r:SORTED_BY]->(t)
 }
-WITH row, p, t
+WITH row, p
 CALL {
     WITH row
-    MATCH (p:Product {productId: row.product_id})
+    MATCH (t:Type {type: row.product_type})
     MERGE (c:Category {category: row.product_category})
-    MERGE (p)-[r:ORGANIZED_IN]->(c)
-    RETURN c
+    MERGE (t)-[r:ORGANIZED_IN]->(c)
 }
-WITH row, p, t, c
+WITH row, p
 CALL {
     WITH row
-    MATCH (p:Product {productId: row.product_id})
-    MERGE (g:Group {group: row.product_group})
     MATCH (c:Category {category: row.product_category})
+    MERGE (g:Group {group: row.product_group})
     MERGE (c)-[r:PART_OF]->(g)
-    RETURN g
 }
 RETURN count(p);
 
@@ -54,7 +51,7 @@ RETURN count(p);
 LOAD CSV WITH HEADERS FROM "https://raw.githubusercontent.com/JMHReif/graph-demo-datasets/main/coffee-shop/customer.csv" AS row
 MERGE (c:Customer {customerId: row.customer_id})
 ON CREATE SET c.homeStore = row.home_store,
-    c.firstName = row.customer_first-name,
+    c.firstName = row.`customer_first-name`,
     c.email = row.customer_email,
     c.entryDate = row.customer_since,
     c.loyaltyCard = row.loyalty_card_number,
@@ -85,10 +82,10 @@ MERGE (s:Staff {staffId: row.staff_id})
 ON CREATE SET s.firstName = row.first_name,
     s.lastName = row.last_name,
     s.position = row.position,
-    s.startDate = date(row.start_date),
+    s.startDate = date(apoc.date.convertFormat(row.start_date, 'M/d/yyyy', 'iso_date')),
     s.location = row.location
-WITH row, s
-OPTIONAL MATCH (b:Building {buildingId: row.location})
+WITH row, s WHERE row.location <> "HQ" OR row.location <> "FL"
+MATCH (b:Building {buildingId: row.location})
 MERGE (s)-[r:WORKS_IN]->(b)
 RETURN count(s);
 
