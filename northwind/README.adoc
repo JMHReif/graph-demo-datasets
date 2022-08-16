@@ -9,3 +9,9 @@ This data is sourced from the https://github.com/neo4j-graph-examples/northwind[
 == Data Model
 
 image:{img}/northwind-data-model.png[]
+
+== Presentation
+
+PDF versions of accompanying presentations are published to SpeakerDeck.
+
+* https://speakerdeck.com/jmhreif/graph-databases-solving-problems-with-connected-data[Graph Databases: Solving Problems with Connected Data^]

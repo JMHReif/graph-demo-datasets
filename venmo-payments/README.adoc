@@ -1,3 +1,7 @@
+:readme:
+:sectnums:
+:img: ./img
+
 = Venmo API graph data import
 
 _NOTE: Due to the size of the data files, you will need `git-lfs` installed to clone this repository. You can install the tool via homebrew and other package managers, or you can download the library. For more details, see Github's https://git-lfs.github.com/[page] for information on git-lfs._
