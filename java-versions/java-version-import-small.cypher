@@ -6,7 +6,7 @@ CREATE INDEX version_diff FOR (v:VersionDiff) ON (v.fromVersion, v.toVersion);
 
 //Queries:
 //1) Load Java versions
-WITH [1.0,1.1,1.2,1.3,1.4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19] as versions
+WITH [1.0,1.1,1.2,1.3,1.4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20] as versions
 CALL apoc.periodic.iterate('UNWIND $versions as version RETURN version',
     'CALL apoc.load.json("https://raw.githubusercontent.com/marchof/java-almanac/master/site/data/jdk/versions/"+version+".json")
     YIELD value
@@ -14,17 +14,8 @@ CALL apoc.periodic.iterate('UNWIND $versions as version RETURN version',
      ON CREATE SET j.name = value.name, j.codeName = value.codename, 
      j.gaDate = date(value.ga),
      j.status = value.status, j.bytecode = value.bytecode, j.vmSpec = value.documentation.vm, 
-     j.languageSpec = value.documentation.lang, j.apiSpec = value.documentation.api 
-    WITH value, j
-    WHERE value.eol IS NOT NULL
-    WITH value, j, trim(split(value.eol, "(")[0]) as dateString
-    WITH value, j, dateString, split(dateString,"-") as dateParts
-    WITH value, j, dateString, (CASE
-        WHEN size(dateString) = 7 THEN date({year: toInteger(dateParts[0]), month: toInteger(dateParts[1])})
-        WHEN size(dateString) = 10 THEN date({year: toInteger(dateParts[0]), month: toInteger(dateParts[1]), day: toInteger(dateParts[2])})
-        ELSE date(dateString)
-        END) as eolDate
-     SET j.eolDate = eolDate',
+     j.languageSpec = value.documentation.lang, j.apiSpec = value.documentation.api,
+     j.eolDate = date(value.eol)',
     {batchSize: 50, iterateList:false, params:{versions:versions}})
 YIELD batches, total, timeTaken, committedOperations, failedOperations, failedBatches , retries, errorMessages , batch , operations, wasTerminated
 RETURN batches, total, timeTaken, committedOperations, failedOperations, failedBatches , retries, errorMessages , batch , operations, wasTerminated;
