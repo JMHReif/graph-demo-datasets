@@ -49,6 +49,16 @@ CALL { WITH review
 //69791 Review nodes
 //69791 WRITTEN_FOR relationships
 
+//Clean up Review properties
+:auto MATCH (r:Review)
+CALL {
+    WITH r
+     SET r.date_added = datetime(apoc.date.convertFormat(r.date_added, 'EEE LLL dd HH:mm:ss Z yyyy', 'iso_offset_date_time')),
+     r.date_updated = datetime(apoc.date.convertFormat(r.date_updated, 'EEE LLL dd HH:mm:ss Z yyyy', 'iso_offset_date_time')),
+     r.started_at = datetime(apoc.date.convertFormat(r.started_at, 'EEE LLL dd HH:mm:ss Z yyyy', 'iso_offset_date_time')),
+     r.read_at = datetime(apoc.date.convertFormat(r.read_at, 'EEE LLL dd HH:mm:ss Z yyyy', 'iso_offset_date_time'))
+} in transactions of 20000 rows;
+//249836 Review properties updated
 
 // To delete all the data:
 
