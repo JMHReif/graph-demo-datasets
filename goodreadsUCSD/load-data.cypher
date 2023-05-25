@@ -6,6 +6,7 @@
 CREATE CONSTRAINT FOR (b:Book) REQUIRE b.book_id IS UNIQUE;
 CREATE CONSTRAINT FOR (a:Author) REQUIRE a.author_id IS UNIQUE;
 CREATE CONSTRAINT FOR (r:Review) REQUIRE r.review_id IS UNIQUE;
+CREATE CONSTRAINT FOR (u:User) REQUIRE u.user_id IS UNIQUE;
 
 //Load 10,000 books
 CALL apoc.load.json("https://data.neo4j.com/goodreads/goodreads_books_10k.json") YIELD value as book
@@ -69,6 +70,17 @@ CALL {
      r.read_at = datetime(apoc.date.convertFormat(r.read_at, 'EEE LLL dd HH:mm:ss Z yyyy', 'iso_offset_date_time'))
 } in transactions of 20000 rows;
 //249836 Review properties updated
+
+//Separate User nodes from Review nodes
+:auto MATCH (r:Review)
+WHERE r.user_id IS NOT NULL
+CALL {
+    WITH r
+    MERGE (u:User {user_id: r.user_id})
+    WITH r, u
+    MERGE (r)<-[:PUBLISHED]-(u)
+} in transactions of 20000 rows;
+//14230 User nodes added
 
 // To delete all the data:
 
