@@ -8,6 +8,8 @@ CREATE CONSTRAINT FOR (a:Author) REQUIRE a.author_id IS UNIQUE;
 CREATE CONSTRAINT FOR (r:Review) REQUIRE r.review_id IS UNIQUE;
 CREATE CONSTRAINT FOR (u:User) REQUIRE u.user_id IS UNIQUE;
 
+CREATE INDEX FOR (r:Review) ON (r.user_id);
+
 //Load 10,000 books
 CALL apoc.load.json("https://data.neo4j.com/goodreads/goodreads_books_10k.json") YIELD value as book
 MERGE (b:Book {book_id: book.book_id})
