@@ -6,20 +6,20 @@
 //If executing in Neo4j Browser, use below syntax
 //:params "marvel_public": "<your public API key here>", "marvel_private": "<your private API key here>"
 
-CREATE CONSTRAINT ON (char:Character) ASSERT char.id IS UNIQUE;
-CREATE CONSTRAINT ON (cre:Creator) ASSERT cre.id IS UNIQUE;
-CREATE CONSTRAINT ON (issue:ComicIssue) ASSERT issue.id IS UNIQUE;
-CREATE CONSTRAINT ON (series:Series) ASSERT series.id IS UNIQUE;
-CREATE CONSTRAINT ON (story:Story) ASSERT story.id IS UNIQUE;
-CREATE CONSTRAINT ON (event:Event) ASSERT event.id IS UNIQUE;
+CREATE CONSTRAINT FOR (char:Character) REQUIRE char.id IS UNIQUE;
+CREATE CONSTRAINT FOR (cre:Creator) REQUIRE cre.id IS UNIQUE;
+CREATE CONSTRAINT FOR (issue:ComicIssue) REQUIRE issue.id IS UNIQUE;
+CREATE CONSTRAINT FOR (series:Series) REQUIRE series.id IS UNIQUE;
+CREATE CONSTRAINT FOR (story:Story) REQUIRE story.id IS UNIQUE;
+CREATE CONSTRAINT FOR (event:Event) REQUIRE event.id IS UNIQUE;
 
-CREATE INDEX ON :Character(name);
-CREATE INDEX ON :Character(resourceURI);
-CREATE INDEX ON :Creator(resourceURI);
-CREATE INDEX ON :ComicIssue(resourceURI);
-CREATE INDEX ON :Series(resourceURI);
-CREATE INDEX ON :Story(resourceURI);
-CREATE INDEX ON :Event(resourceURI);
+CREATE INDEX FOR (char:Character) ON (char.name);
+CREATE INDEX FOR (char:Character) ON (char.resourceURI);
+CREATE INDEX FOR (cre:Creator) ON (cre.resourceURI);
+CREATE INDEX FOR (issue:ComicIssue) ON (issue.resourceURI);
+CREATE INDEX FOR (series:Series) ON (series.resourceURI);
+CREATE INDEX FOR (story:Story) ON (story.resourceURI);
+CREATE INDEX FOR (event:Event) ON (event.resourceURI);
 
 //2) Load chunks of Characters by name starting with each letter of the alphabet.
 WITH apoc.date.format(timestamp(), "ms", 'yyyyMMddHHmmss') AS ts
@@ -91,10 +91,10 @@ RETURN batches, total, timeTaken, committedOperations, failedOperations, failedB
 //└─────────┴───────┴───────────┴─────────────────────┴──────────────────┴───────────────┴─────────┴───────────────┴────────────────────────────────────────────────┴────────────────────────────────────────────────────┴───────────────┘
 
 
-//4) For all of the Series that have not been loaded yet, load the Series.
+//4) For all of the Series, hydrate the nodes with a few more properties.
 WITH apoc.date.format(timestamp(), "ms", 'yyyyMMddHHmmss') AS ts
 WITH "&ts=" + ts + "&apikey=" + $marvel_public + "&hash=" + apoc.util.md5([ts,$marvel_private,$marvel_public]) as suffix
-CALL apoc.periodic.iterate('MATCH (s:Series) WHERE s.resourceURI IS NOT NULL AND not exists(s.startYear) RETURN s LIMIT 100',
+CALL apoc.periodic.iterate('MATCH (s:Series) WHERE s.resourceURI IS NOT NULL AND s.startYear IS NULL RETURN s LIMIT 100',
 'CALL apoc.util.sleep(2000)
 CALL apoc.load.json(s.resourceURI+"?limit=100" + $suffix) YIELD value
 WITH value.data.results as results WHERE results IS NOT NULL
@@ -114,10 +114,10 @@ RETURN batches, total, timeTaken, committedOperations, failedOperations, failedB
 //└─────────┴───────┴───────────┴─────────────────────┴──────────────────┴───────────────┴─────────┴───────────────┴────────────────────────────────────────────────┴────────────────────────────────────────────────────┴───────────────┘
 
 
-//5) For all of the Characters (names starting with "A"), hydrate the Event nodes with a few more properties.
+//5) For all of the Events, hydrate the nodes with a few more properties.
 WITH apoc.date.format(timestamp(), "ms", 'yyyyMMddHHmmss') AS ts
 WITH "&ts=" + ts + "&apikey=" + $marvel_public + "&hash=" + apoc.util.md5([ts,$marvel_private,$marvel_public]) as suffix
-CALL apoc.periodic.iterate('MATCH (event:Event) WHERE event.resourceURI IS NOT NULL AND NOT exists(event.start) RETURN DISTINCT event LIMIT 100',
+CALL apoc.periodic.iterate('MATCH (event:Event) WHERE event.resourceURI IS NOT NULL AND event.start IS NULL RETURN DISTINCT event LIMIT 100',
 'CALL apoc.util.sleep(2000) CALL apoc.load.json(event.resourceURI+"?limit=100"+$suffix) YIELD value
 UNWIND value.data.results as result
 MERGE (e:Event {id: result.id})
