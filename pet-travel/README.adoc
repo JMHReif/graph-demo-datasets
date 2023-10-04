@@ -1,0 +1,31 @@
+:readme:
+:sectnums:
+:img: ./img
+
+= Pet Travel
+
+This data is sourced from a few locations and pulled together for analysis in a graph database.
+
+* https://www.geoapify.com/places-api[Google Places API^] (*api key required*)
+* https://fusion.yelp.com/[Yelp Fusion API^] (*api key required*)
+* AirBnB Listings API
+
+== Data Model
+
+image:{img}/pet-travel-data-model.png[]
+
+== Resources
+
+* Google API:
+** https://apidocs.geoapify.com/playground/places/[Google API playground^]
+** https://apidocs.geoapify.com/docs/places/#categories[Categories list^]
+** https://apidocs.geoapify.com/docs/places/#api[Dogs condition^]
+
+* Yelp API:
+** https://docs.developer.yelp.com/reference/v3_business_search[Yelp API playground^]
+** https://docs.developer.yelp.com/docs/resources-categories[Categories list^]
+** https://docs.developer.yelp.com/docs/data-ingestion-api#business[Dogs_allowed field^]
+
+* AirBnB Listings API:
+** https://public.opendatasoft.com/explore/dataset/airbnb-listings/api[Airbnb API playground^]
+** https://help.opendatasoft.com/apis/ods-explore-v2/#section/Opendatasoft-Query-Language-(ODSQL)/Where-clause[Where clause (for adding pet criteria)^]

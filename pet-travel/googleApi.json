@@ -1,0 +1,178 @@
+{
+    "leisure": [
+        {
+            "geometry": {
+                "coordinates": [
+                    -87.69656788831638,
+                    41.913963115340394
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "country": "United States",
+                "city": "Chicago",
+                "formatted": "The 606, Chicago, IL 60647, United States of America",
+                "county": "Cook County",
+                "municipality": "West Chicago Township",
+                "postcode": "60647",
+                "lon": -87.6968115,
+                "country_code": "us",
+                "address_line2": "Chicago, IL 60647, United States of America",
+                "address_line1": "The 606",
+                "datasource": {
+                    "license": "Open Database Licence",
+                    "attribution": "© OpenStreetMap contributors",
+                    "raw": {
+                        "area": "yes",
+                        "osm_id": 13360336,
+                        "operator:type": "public",
+                        "addr:state": "IL",
+                        "operator:wikidata": "Q2963322",
+                        "operator:wikipedia": "en:Chicago Park District",
+                        "addr:postcode": 60647,
+                        "layer": 2,
+                        "operator": "Chicago Park District",
+                        "addr:city": "Chicago",
+                        "osm_type": "r",
+                        "addr:housenumber": "1600-3750",
+                        "name": "The 606",
+                        "opening_hours": "Mo-Su 06:00-23:00",
+                        "wikipedia": "en:Bloomingdale Trail",
+                        "addr:street": "West Bloomingdale Street",
+                        "dog": "leashed",
+                        "leisure": "park",
+                        "wikidata": "Q4928316",
+                        "ele": 190
+                    },
+                    "sourcename": "openstreetmap",
+                    "url": "https://www.openstreetmap.org/copyright"
+                },
+                "name": "The 606",
+                "suburb": "West Town",
+                "details": [
+                    "details",
+                    "details.facilities",
+                    "details.wiki_and_media"
+                ],
+                "state": "Illinois",
+                "categories": [
+                    "dogs",
+                    "dogs.leashed",
+                    "leisure",
+                    "leisure.park"
+                ],
+                "state_code": "IL",
+                "lat": 41.9138723,
+                "place_id": "51cff07a9194ec55c05992114dbefcf44440f00101f901d0dccb000000000092030754686520363036"
+            }
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    -87.70992105000002,
+                    41.91877520048008
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "country": "United States",
+                "city": "Chicago",
+                "formatted": "Maple Park, Chicago, IL 60647, United States of America",
+                "county": "Cook County",
+                "municipality": "Jefferson Township",
+                "postcode": "60647",
+                "lon": -87.70992105,
+                "country_code": "us",
+                "address_line2": "Chicago, IL 60647, United States of America",
+                "address_line1": "Maple Park",
+                "datasource": {
+                    "license": "Open Database Licence",
+                    "attribution": "© OpenStreetMap contributors",
+                    "raw": {
+                        "osm_id": 176300287,
+                        "operator:type": "public",
+                        "addr:state": "IL",
+                        "operator:wikidata": "Q2963322",
+                        "addr:postcode": 60647,
+                        "operator": "Chicago Park District",
+                        "addr:city": "Chicago",
+                        "osm_type": "w",
+                        "name": "Maple Park",
+                        "addr:street": "North Spaulding Avenue",
+                        "dog": "leashed",
+                        "leisure": "park",
+                        "wikidata": "Q49521434",
+                        "ele": 183
+                    },
+                    "sourcename": "openstreetmap",
+                    "url": "https://www.openstreetmap.org/copyright"
+                },
+                "name": "Maple Park",
+                "suburb": "Logan Square",
+                "details": [
+                    "details",
+                    "details.facilities",
+                    "details.wiki_and_media"
+                ],
+                "state": "Illinois",
+                "categories": [
+                    "dogs",
+                    "dogs.leashed",
+                    "leisure",
+                    "leisure.park"
+                ],
+                "state_code": "IL",
+                "lat": 41.9187752,
+                "place_id": "517e1fb3586fed55c0590938ff6c9af54440f00102f901ff20820a0000000092030a4d61706c65205061726b"
+            }
+        }
+    ],
+    "pet": [{
+        "geometry": {
+            "coordinates": [
+                -87.6338766974647,
+                41.895280301310535
+            ],
+            "type": "Point"
+        },
+        "type": "Feature",
+        "properties": {
+            "country": "United States",
+            "city": "Chicago",
+            "formatted": "North Wells Street, Chicago, IL 60654, United States of America",
+            "county": "Cook County",
+            "postcode": "60654",
+            "lon": -87.63387674884949,
+            "country_code": "us",
+            "address_line2": "Chicago, IL 60654, United States of America",
+            "address_line1": "North Wells Street",
+            "street": "North Wells Street",
+            "datasource": {
+                "license": "Open Database Licence",
+                "attribution": "© OpenStreetMap contributors",
+                "raw": {
+                    "osm_id": 787821282,
+                    "osm_type": "w",
+                    "dog": "yes",
+                    "leisure": "dog_park"
+                },
+                "sourcename": "openstreetmap",
+                "url": "https://www.openstreetmap.org/copyright"
+            },
+            "district": "River North",
+            "details": ["details.facilities"],
+            "state": "Illinois",
+            "categories": [
+                "dogs",
+                "dogs.yes",
+                "pet",
+                "pet.dog_park"
+            ],
+            "state_code": "IL",
+            "lat": 41.89528025,
+            "place_id": "51ac53916f91e855c059de707f8b98f24440f00102f901e232f52e00000000"
+        }
+    }]
+}
