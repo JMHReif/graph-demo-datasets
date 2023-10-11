@@ -35,25 +35,12 @@ MERGE (c)-[r:CONTAINS]->(s)
 MERGE (s)-[r2:CONTAINS]->(p)
 RETURN * LIMIT 30;
 
-//BKUP
-//hydrate the category nodes and create subcategory paths
-// MATCH (subcats:Category)<-[:PART_OF]-(p:Place)
-// WHERE subcats.name CONTAINS "."
-// WITH subcats, p, split(subcats.name,".") as subcat
-// WITH subcat, p, apoc.coll.pairsMin(subcat) as pairs
-// UNWIND pairs as pair
-// MERGE (c:Category {name: pair[0]})
-// MERGE (c2:Category:Subcategory {name: pair[1]})
-// MERGE (c)-[r:CONTAINS]->(c2)
-// MERGE (c2)-[r2:CONTAINS]->(p)
-// RETURN * LIMIT 30;
-
 //delete the placeholder relationships to categories
 MATCH (subcats:Category)<-[temp:PART_OF]-(p:Place)
 DELETE temp
 WITH subcats
 WHERE subcats.name CONTAINS "."
-DETACH DELETE subcats
+DETACH DELETE subcats;
 
 //review graph data model
-CALL apoc.meta.graph()
+CALL apoc.meta.graph();

@@ -14,6 +14,22 @@ This data is sourced from a few locations and pulled together for analysis in a 
 
 image:{img}/pet-travel-data-model.png[]
 
+== Data Load
+
+The accompanying JBang script pulls the data from the API sources and dumps it into JSON files, which are also included in this repository. 
+To pull the data from the API sources yourself, you can execute the accompanying JBang script by running the following command:
+
+[source,shell]
+----
+jbang travelPetDataImport.java
+----
+
+To load the data to Neo4j, you can run the Cypher statements outlined in the three `.cypher` files included.
+
+Total loaded data size:
+* 19252 nodes
+* 195513 relationships
+
 == Resources
 
 * Google API:

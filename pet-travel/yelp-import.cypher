@@ -34,4 +34,4 @@ MERGE (s)-[r2:CONTAINS]->(p)
 RETURN * LIMIT 50;
 
 //review graph data model
-CALL apoc.meta.graph()
+CALL apoc.meta.graph();
