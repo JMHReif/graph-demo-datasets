@@ -28,6 +28,7 @@ public class travelPetDataImport {
         filename = "googleApi.json";
         //https://apidocs.geoapify.com/docs/places/#categories
         String[] googleCategories = {"commercial","catering","accommodation","leisure","natural","pet","building","beach","tourism"};
+        String location = "513cbd5296217e52c059cf66d5e76a574440c00208e2031d77686f736f6e66697273743a6c6f63616c6974793a3835393737353339";
 
         try {
             JSONObject json = new JSONObject();
@@ -39,7 +40,7 @@ public class travelPetDataImport {
                 System.out.println("Google - " + category);
 
                 Request request = new Request.Builder()
-                        .url("https://api.geoapify.com/v2/places?categories=" + category + "&conditions=dogs&filter=place:51a7d87a6be4eb55c0593fd632bf4ceb4440f00101f901ecde010000000000c002069203074368696361676f&apiKey=" + googleApiKey)
+                        .url("https://api.geoapify.com/v2/places?categories=" + category + "&conditions=dogs&filter=place:" + location + "&limit=100&apiKey=" + googleApiKey)
                         .method("GET", null)
                         .build();
                 Response response = client.newCall(request).execute();
@@ -72,6 +73,7 @@ public class travelPetDataImport {
         filename = "yelpApi.json";
         //https://docs.developer.yelp.com/docs/resources-categories
         String[] yelpCategories = {"active","arts","food","hotelstravel","nightlife","pets","restaurants","shopping"};
+        String location = "New%20York%20City";
 
         try {
             JSONObject json = new JSONObject();
@@ -82,7 +84,7 @@ public class travelPetDataImport {
                 System.out.println("Yelp - " + category);
 
                 Request request = new Request.Builder()
-                        .url("https://api.yelp.com/v3/businesses/search?location=Chicago&categories=" + category + "&attributes=dogs_allowed&sort_by=distance")
+                        .url("https://api.yelp.com/v3/businesses/search?location=" + location + "&categories=" + category + "&attributes=dogs_allowed&limit=50&sort_by=distance")
                         .get()
                         .addHeader("accept", "application/json")
                         .addHeader("Authorization", "Bearer " + yelpApiKey)
@@ -120,7 +122,8 @@ public class travelPetDataImport {
         int offset = 0;
         int max = 10000;
         int batch = 0;
-        String urlPrefix = "https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/airbnb-listings/records?where=%22dog%22%20OR%20%22cat%22%20AND%20%22Chicago%22&limit=";
+        String location = "Chicago";
+        String urlPrefix = "https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/airbnb-listings/records?where=%22dog%22%20OR%20%22cat%22%20AND%20%22" + location + "%22&limit=";
 
         try {
             JSONObject json = new JSONObject();

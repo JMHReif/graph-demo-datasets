@@ -9,7 +9,7 @@ RETURN result LIMIT 5;
 CALL apoc.load.json(url,'$.results') YIELD value as result
 CALL { WITH result
     MERGE (p:Place {id: result.id})
-     SET p.name = result.name, p.url = result.listing_url, p.description = result.description, p.type = result.property_type, p.roomType = result.room_type, p.accommodates = result.accommodates, p.lat = result.latitude, p.lon = result.longitude, p.cancellationPolicy = result.cancellation_policy, p.imageUrl = result.picture_url.url, p.bedrooms = result.bedrooms, p.beds = result.beds, p.bathrooms = result.bathrooms, p.price = result.price, p.space = result.space, p.rating = result.review_scores_rating, p.reviews = result.number_of_reviews, p.cleaningFee = result.cleaning_fee, p.houseRules = result.house_rules, p.neighborhood = result.neighborhood_cleansed, p.neighborhoodOverview = result.neighborhood_overview, p.address = result.street, p.city = result.city, p.state = result.state, p.postalCode = result.zipcode, p.country = result.country, p.countryCode = result.country_code
+     SET p.name = result.name, p.url = result.listing_url, p.description = result.description, p.type = result.property_type, p.roomType = result.room_type, p.accommodates = result.accommodates, p.lat = toFloat(result.latitude), p.lon = toFloat(result.longitude), p.cancellationPolicy = result.cancellation_policy, p.imageUrl = result.picture_url.url, p.bedrooms = result.bedrooms, p.beds = result.beds, p.bathrooms = result.bathrooms, p.price = result.price, p.space = result.space, p.rating = result.review_scores_rating, p.reviews = result.number_of_reviews, p.cleaningFee = result.cleaning_fee, p.houseRules = result.house_rules, p.neighborhood = result.neighborhood_cleansed, p.neighborhoodOverview = result.neighborhood_overview, p.address = result.street, p.city = result.city, p.state = result.state, p.postalCode = result.zipcode, p.country = result.country, p.countryCode = result.country_code
 } in transactions of 1000 rows;
 //9999 Place nodes
 
@@ -34,7 +34,8 @@ CALL { WITH result
     WITH result, p
     WHERE result.amenities IS NOT NULL
     UNWIND result.amenities as amenity
-    MERGE (a:Amenity {name: amenity})
+    WITH result, p, apoc.text.regreplace(amenity, "[()]", "") as amenityClean
+    MERGE (a:Amenity {name: toLower(amenityClean)})
     WITH result, p, a
     MERGE (p)-[r2:PROVIDES]->(a)
 } in transactions of 1000 rows;

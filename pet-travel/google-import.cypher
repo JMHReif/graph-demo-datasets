@@ -11,7 +11,7 @@ UNWIND apiCategories as apiCategory
 WITH value[apiCategory] as places
 UNWIND places as place
 MERGE (p:Place {id: place.properties.place_id})
-  SET p.address = place.properties.street, p.city = place.properties.city, p.state = place.properties.state, p.postalCode = place.properties.postcode, p.country = place.properties.country, p.lat = place.properties.lat, p.lon = place.properties.lon
+  SET p.address = place.properties.street, p.city = place.properties.city, p.state = place.properties.state, p.postalCode = place.properties.postcode, p.country = place.properties.country, p.lat = toFloat(place.properties.lat), p.lon = toFloat(place.properties.lon)
 WITH p, place, CASE
  WHEN place.properties.name IS NULL THEN place.properties.address_line1
  ELSE place.properties.name

@@ -1,178 +1,1547 @@
 {
+    "commercial": [
+        {
+            "geometry": {
+                "coordinates": [
+                    -73.98357439999998,
+                    40.67855730035469
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "country": "United States",
+                "distance": 1185,
+                "city": "New York",
+                "formatted": "Wild East Brewing Company, 623 Sackett Street, New York, NY 11217, United States of America",
+                "postcode": "11217",
+                "lon": -73.9835744,
+                "country_code": "us",
+                "address_line2": "623 Sackett Street, New York, NY 11217, United States of America",
+                "housenumber": "623",
+                "address_line1": "Wild East Brewing Company",
+                "street": "Sackett Street",
+                "datasource": {
+                    "license": "Open Database Licence",
+                    "attribution": "© OpenStreetMap contributors",
+                    "raw": {
+                        "osm_id": 5742636433,
+                        "website": "https://www.wildeastbrewing.com",
+                        "shop": "alcohol",
+                        "amenity": "bar",
+                        "craft": "brewery",
+                        "description": "craft brewery with taproom and canned beer to go",
+                        "description:covid19": "beer to go with lmited outdoor seating",
+                        "addr:postcode": 11217,
+                        "osm_type": "n",
+                        "addr:housenumber": 623,
+                        "phone": "+1-718-797-5135",
+                        "name": "Wild East Brewing Company",
+                        "opening_hours": "Mo-Th 14:00-21:00; Fr-Su 12:00-21:00",
+                        "drink:beer": "only",
+                        "addr:street": "Sackett Street",
+                        "dog": "yes",
+                        "changing_table": "yes"
+                    },
+                    "sourcename": "openstreetmap",
+                    "url": "https://www.openstreetmap.org/copyright"
+                },
+                "name": "Wild East Brewing Company",
+                "suburb": "Brooklyn",
+                "details": [
+                    "details",
+                    "details.contact",
+                    "details.facilities",
+                    "details.production"
+                ],
+                "state": "New York",
+                "categories": [
+                    "catering",
+                    "catering.bar",
+                    "commercial",
+                    "commercial.food_and_drink",
+                    "commercial.food_and_drink.drinks",
+                    "dogs",
+                    "dogs.yes",
+                    "production",
+                    "production.brewery"
+                ],
+                "state_code": "NY",
+                "lat": 40.6785573,
+                "place_id": "51b24b0ae2f27e52c05923be32f7da564440f00103f90191ad49560100000092031957696c6420456173742042726577696e6720436f6d70616e79"
+            }
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    -73.9929579,
+                    40.68813630035584
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "country": "United States",
+                "distance": 1960,
+                "city": "New York",
+                "formatted": "Boisson, 177 Court Street, New York, NY 11201, United States of America",
+                "postcode": "11201",
+                "lon": -73.9929579,
+                "country_code": "us",
+                "address_line2": "177 Court Street, New York, NY 11201, United States of America",
+                "housenumber": "177",
+                "address_line1": "Boisson",
+                "street": "Court Street",
+                "datasource": {
+                    "license": "Open Database Licence",
+                    "attribution": "© OpenStreetMap contributors",
+                    "raw": {
+                        "osm_id": 5709511674,
+                        "osm_type": "n",
+                        "website": "https://boisson.nyc",
+                        "shop": "beverages",
+                        "phone": "+1-877-655-9177",
+                        "name": "Boisson",
+                        "opening_hours": "Mo-Fr 12:00-20:00; Sa-Su 11:00-20:00",
+                        "description": "alcohol-free wine, beer, and cocktails",
+                        "dog": "yes"
+                    },
+                    "sourcename": "openstreetmap",
+                    "url": "https://www.openstreetmap.org/copyright"
+                },
+                "district": "Cobble Hill",
+                "name": "Boisson",
+                "suburb": "Brooklyn",
+                "details": [
+                    "details",
+                    "details.contact",
+                    "details.facilities"
+                ],
+                "state": "New York",
+                "categories": [
+                    "commercial",
+                    "commercial.food_and_drink",
+                    "commercial.food_and_drink.drinks",
+                    "dogs",
+                    "dogs.yes"
+                ],
+                "state_code": "NY",
+                "lat": 40.6881363,
+                "place_id": "5182b34a9f8c7f52c059019cacd914584440f00103f901fa3b505401000000920307426f6973736f6e"
+            }
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    -73.99760510000002,
+                    40.67846510035468
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "country": "United States",
+                "distance": 2320,
+                "city": "New York",
+                "formatted": "Carroll Gardens Wines & Liquors, 427 Court Street, New York, NY 11231, United States of America",
+                "postcode": "11231",
+                "lon": -73.9976051,
+                "country_code": "us",
+                "address_line2": "427 Court Street, New York, NY 11231, United States of America",
+                "housenumber": "427",
+                "address_line1": "Carroll Gardens Wines & Liquors",
+                "street": "Court Street",
+                "datasource": {
+                    "license": "Open Database Licence",
+                    "attribution": "© OpenStreetMap contributors",
+                    "raw": {
+                        "osm_id": 2494252062,
+                        "osm_type": "n",
+                        "website": "http://www.courtstreetwines.com",
+                        "alt_name": "T. Scotto Liquor Store",
+                        "addr:housenumber": 427,
+                        "shop": "alcohol",
+                        "name": "Carroll Gardens Wines & Liquors",
+                        "opening_hours": "Mo 11:00-20:00; Tu-Sa 11:00-20:30; Su 12:00-17:30",
+                        "addr:street": "Court Street",
+                        "dog": "yes",
+                        "addr:postcode": 11231
+                    },
+                    "sourcename": "openstreetmap",
+                    "url": "https://www.openstreetmap.org/copyright"
+                },
+                "district": "Carroll Gardens",
+                "name": "Carroll Gardens Wines & Liquors",
+                "suburb": "Brooklyn",
+                "details": [
+                    "details",
+                    "details.facilities"
+                ],
+                "state": "New York",
+                "categories": [
+                    "commercial",
+                    "commercial.food_and_drink",
+                    "commercial.food_and_drink.drinks",
+                    "dogs",
+                    "dogs.yes"
+                ],
+                "state_code": "NY",
+                "lat": 40.6784651,
+                "place_id": "51aab40fc3d87f52c05917c0c4f1d7564440f00103f9011e44ab940000000092031f436172726f6c6c2047617264656e732057696e65732026204c6971756f7273"
+            }
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    -73.9994013,
+                    40.684434400355414
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "country": "United States",
+                "distance": 2423,
+                "city": "New York",
+                "formatted": "Henry Street Wines & Liquors, 494 Henry Street, New York, NY 11231, United States of America",
+                "postcode": "11231",
+                "lon": -73.9994013,
+                "country_code": "us",
+                "address_line2": "494 Henry Street, New York, NY 11231, United States of America",
+                "housenumber": "494",
+                "address_line1": "Henry Street Wines & Liquors",
+                "street": "Henry Street",
+                "datasource": {
+                    "license": "Open Database Licence",
+                    "attribution": "© OpenStreetMap contributors",
+                    "raw": {
+                        "osm_id": 6436938484,
+                        "osm_type": "n",
+                        "delivery": "yes",
+                        "website": "https://www.henrystreetwines.com",
+                        "shop": "alcohol",
+                        "drink:liquor": "yes",
+                        "phone": "+1-718-858-1928",
+                        "name": "Henry Street Wines & Liquors",
+                        "opening_hours": "Mo-We 12:00-21:00; Th 12:00-22:00; Fr-Sa 11:00-22:00; Su 12:00-21:00",
+                        "drink:wine": "yes",
+                        "dog": "yes"
+                    },
+                    "sourcename": "openstreetmap",
+                    "url": "https://www.openstreetmap.org/copyright"
+                },
+                "district": "Cobble Hill",
+                "name": "Henry Street Wines & Liquors",
+                "suburb": "Brooklyn",
+                "details": [
+                    "details",
+                    "details.contact",
+                    "details.facilities"
+                ],
+                "state": "New York",
+                "categories": [
+                    "commercial",
+                    "commercial.food_and_drink",
+                    "commercial.food_and_drink.drinks",
+                    "dogs",
+                    "dogs.yes"
+                ],
+                "state_code": "NY",
+                "lat": 40.6844344,
+                "place_id": "511dc5de30f67f52c05956e4e28b9b574440f00103f901f4e2ab7f0100000092031c48656e7279205374726565742057696e65732026204c6971756f7273"
+            }
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    -74.0013724,
+                    40.687441300355786
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "country": "United States",
+                "distance": 2632,
+                "city": "New York",
+                "formatted": "Freebird Books, 123 Columbia Street, New York, NY 11231, United States of America",
+                "postcode": "11231",
+                "lon": -74.0013724,
+                "country_code": "us",
+                "address_line2": "123 Columbia Street, New York, NY 11231, United States of America",
+                "housenumber": "123",
+                "address_line1": "Freebird Books",
+                "street": "Columbia Street",
+                "datasource": {
+                    "license": "Open Database Licence",
+                    "attribution": "© OpenStreetMap contributors",
+                    "raw": {
+                        "osm_id": 6501029660,
+                        "osm_type": "n",
+                        "shop": "books",
+                        "phone": "+1-718-643-8484",
+                        "second_hand": "only",
+                        "name": "Freebird Books",
+                        "opening_hours": "Sa,Su 11:00-20:00||\"other days by chance\"",
+                        "description": "independent used bookstore specializing in New York City history",
+                        "dog": "yes"
+                    },
+                    "sourcename": "openstreetmap",
+                    "url": "https://www.openstreetmap.org/copyright"
+                },
+                "district": "Columbia Street Waterfront District",
+                "name": "Freebird Books",
+                "suburb": "Brooklyn",
+                "details": [
+                    "details",
+                    "details.contact",
+                    "details.facilities"
+                ],
+                "state": "New York",
+                "categories": [
+                    "commercial",
+                    "commercial.books",
+                    "dogs",
+                    "dogs.yes"
+                ],
+                "state_code": "NY",
+                "lat": 40.6874413,
+                "place_id": "517d47437c168052c05952799713fe574440f00103f9011cd77d830100000092030e467265656269726420426f6f6b73"
+            }
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    -74.00224864686516,
+                    40.68161671138788
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "country": "United States",
+                "distance": 2653,
+                "city": "New York",
+                "formatted": "Carroll Gardens Plumbing Supply, 629 Hicks Street, New York, NY 11231, United States of America",
+                "postcode": "11231",
+                "lon": -74.00224550482253,
+                "country_code": "us",
+                "address_line2": "629 Hicks Street, New York, NY 11231, United States of America",
+                "housenumber": "629",
+                "address_line1": "Carroll Gardens Plumbing Supply",
+                "street": "Hicks Street",
+                "datasource": {
+                    "license": "Open Database Licence",
+                    "attribution": "© OpenStreetMap contributors",
+                    "raw": {
+                        "osm_id": 746806487,
+                        "website": "https://carrollgardensplumbingsupply.com",
+                        "shop": "hardware",
+                        "level": 0,
+                        "description": "plumbing supplies, bath and kitchen fixtures, tools, hardware",
+                        "addr:postcode": 11231,
+                        "osm_type": "w",
+                        "addr:housenumber": 629,
+                        "phone": "+1-718-522-1001",
+                        "name": "Carroll Gardens Plumbing Supply",
+                        "opening_hours": "Mo-Fr 07:00-17:00; Sa 08:00-15:00",
+                        "addr:street": "Hicks Street",
+                        "dog": "yes"
+                    },
+                    "sourcename": "openstreetmap",
+                    "url": "https://www.openstreetmap.org/copyright"
+                },
+                "district": "Cobble Hill",
+                "name": "Carroll Gardens Plumbing Supply",
+                "suburb": "Brooklyn",
+                "details": [
+                    "details",
+                    "details.commercial",
+                    "details.contact",
+                    "details.facilities"
+                ],
+                "state": "New York",
+                "categories": [
+                    "commercial",
+                    "commercial.houseware_and_hardware",
+                    "commercial.houseware_and_hardware.hardware_and_tools",
+                    "dogs",
+                    "dogs.yes"
+                ],
+                "state_code": "NY",
+                "lat": 40.681629900000004,
+                "place_id": "51c02f82d7248052c059b5e865373f574440f00102f901d75c832c0000000092031f436172726f6c6c2047617264656e7320506c756d62696e6720537570706c79"
+            }
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    -74.0026721,
+                    40.68541130035551
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "country": "United States",
+                "distance": 2708,
+                "city": "New York",
+                "formatted": "Evergreen Liquor Store, 196 Columbia Street, New York, NY 11231, United States of America",
+                "postcode": "11231",
+                "lon": -74.0026721,
+                "country_code": "us",
+                "address_line2": "196 Columbia Street, New York, NY 11231, United States of America",
+                "housenumber": "196",
+                "address_line1": "Evergreen Liquor Store",
+                "street": "Columbia Street",
+                "datasource": {
+                    "license": "Open Database Licence",
+                    "attribution": "© OpenStreetMap contributors",
+                    "raw": {
+                        "osm_id": 6501091573,
+                        "osm_type": "n",
+                        "shop": "alcohol",
+                        "drink:liquor": "yes",
+                        "name": "Evergreen Liquor Store",
+                        "opening_hours": "Mo-Th 11:00-22:30; Fr-Sa 11:00-23:30; Su 13:00-21:00",
+                        "drink:wine": "yes",
+                        "dog": "yes"
+                    },
+                    "sourcename": "openstreetmap",
+                    "url": "https://www.openstreetmap.org/copyright"
+                },
+                "district": "Columbia Street Waterfront District",
+                "name": "Evergreen Liquor Store",
+                "suburb": "Brooklyn",
+                "details": [
+                    "details",
+                    "details.facilities"
+                ],
+                "state": "New York",
+                "categories": [
+                    "commercial",
+                    "commercial.food_and_drink",
+                    "commercial.food_and_drink.drinks",
+                    "dogs",
+                    "dogs.yes"
+                ],
+                "state_code": "NY",
+                "lat": 40.6854113,
+                "place_id": "51258799c72b8052c059faaab78ebb574440f00103f901f5c87e830100000092031645766572677265656e204c6971756f722053746f7265"
+            }
+        }
+    ],
+    "catering": [
+        {
+            "geometry": {
+                "coordinates": [
+                    -73.98357439999998,
+                    40.67855730035469
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "country": "United States",
+                "distance": 1185,
+                "city": "New York",
+                "formatted": "Wild East Brewing Company, 623 Sackett Street, New York, NY 11217, United States of America",
+                "postcode": "11217",
+                "lon": -73.9835744,
+                "country_code": "us",
+                "address_line2": "623 Sackett Street, New York, NY 11217, United States of America",
+                "housenumber": "623",
+                "address_line1": "Wild East Brewing Company",
+                "street": "Sackett Street",
+                "datasource": {
+                    "license": "Open Database Licence",
+                    "attribution": "© OpenStreetMap contributors",
+                    "raw": {
+                        "osm_id": 5742636433,
+                        "website": "https://www.wildeastbrewing.com",
+                        "shop": "alcohol",
+                        "amenity": "bar",
+                        "craft": "brewery",
+                        "description": "craft brewery with taproom and canned beer to go",
+                        "description:covid19": "beer to go with lmited outdoor seating",
+                        "addr:postcode": 11217,
+                        "osm_type": "n",
+                        "addr:housenumber": 623,
+                        "phone": "+1-718-797-5135",
+                        "name": "Wild East Brewing Company",
+                        "opening_hours": "Mo-Th 14:00-21:00; Fr-Su 12:00-21:00",
+                        "drink:beer": "only",
+                        "addr:street": "Sackett Street",
+                        "dog": "yes",
+                        "changing_table": "yes"
+                    },
+                    "sourcename": "openstreetmap",
+                    "url": "https://www.openstreetmap.org/copyright"
+                },
+                "name": "Wild East Brewing Company",
+                "suburb": "Brooklyn",
+                "details": [
+                    "details",
+                    "details.contact",
+                    "details.facilities",
+                    "details.production"
+                ],
+                "state": "New York",
+                "categories": [
+                    "catering",
+                    "catering.bar",
+                    "commercial",
+                    "commercial.food_and_drink",
+                    "commercial.food_and_drink.drinks",
+                    "dogs",
+                    "dogs.yes",
+                    "production",
+                    "production.brewery"
+                ],
+                "state_code": "NY",
+                "lat": 40.6785573,
+                "place_id": "51b24b0ae2f27e52c05923be32f7da564440f00103f90191ad49560100000092031957696c6420456173742042726577696e6720436f6d70616e79"
+            }
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    -73.96171587849503,
+                    40.71349881563276
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "country": "United States",
+                "distance": 3474,
+                "city": "New York",
+                "formatted": "Lucky Dog, 303 Bedford Avenue, New York, NY 11211, United States of America",
+                "postcode": "11211",
+                "lon": -73.96171591320413,
+                "country_code": "us",
+                "address_line2": "303 Bedford Avenue, New York, NY 11211, United States of America",
+                "housenumber": "303",
+                "address_line1": "Lucky Dog",
+                "street": "Bedford Avenue",
+                "datasource": {
+                    "license": "Open Database Licence",
+                    "attribution": "© OpenStreetMap contributors",
+                    "raw": {
+                        "osm_id": 241837928,
+                        "amenity": "pub",
+                        "addr:state": "NY",
+                        "addr:postcode": 11211,
+                        "building": "yes",
+                        "addr:city": "Brooklyn",
+                        "osm_type": "w",
+                        "addr:housenumber": 303,
+                        "name": "Lucky Dog",
+                        "addr:street": "Bedford Avenue",
+                        "outdoor_seating": "yes",
+                        "dog": "yes",
+                        "height": 11.7
+                    },
+                    "sourcename": "openstreetmap",
+                    "url": "https://www.openstreetmap.org/copyright"
+                },
+                "name": "Lucky Dog",
+                "suburb": "Brooklyn",
+                "details": [
+                    "details.building",
+                    "details.catering",
+                    "details.facilities"
+                ],
+                "state": "New York",
+                "categories": [
+                    "building",
+                    "building.catering",
+                    "catering",
+                    "catering.pub",
+                    "dogs",
+                    "dogs.yes"
+                ],
+                "state_code": "NY",
+                "lat": 40.71349884999999,
+                "place_id": "51868bc1c08c7d52c0595070dfed535b4440f00102f90168276a0e000000009203094c75636b7920446f67",
+                "quarter": "Williamsburg"
+            }
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    -73.9394972,
+                    40.71960160035965
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "country": "United States",
+                "distance": 4854,
+                "city": "New York",
+                "formatted": "18th Ward Brewing, 300 Richardson Street, New York, NY 11222, United States of America",
+                "postcode": "11222",
+                "lon": -73.9394972,
+                "country_code": "us",
+                "address_line2": "300 Richardson Street, New York, NY 11222, United States of America",
+                "housenumber": "300",
+                "address_line1": "18th Ward Brewing",
+                "street": "Richardson Street",
+                "datasource": {
+                    "license": "Open Database Licence",
+                    "attribution": "© OpenStreetMap contributors",
+                    "raw": {
+                        "osm_id": 9695838107,
+                        "website": "https://www.18thwardbrewing.com",
+                        "microbrewery": "yes",
+                        "amenity": "pub",
+                        "addr:postcode": 11222,
+                        "osm_type": "n",
+                        "addr:housenumber": 300,
+                        "phone": "+1 718-387-4025",
+                        "name": "18th Ward Brewing",
+                        "opening_hours": "Fr 16:00-00:00; Sa 12:00-22:00; Su 12:00-20:00",
+                        "reservation": "yes",
+                        "addr:street": "Richardson Street",
+                        "dog": "yes",
+                        "email": "info@18thwardbrewing.com"
+                    },
+                    "sourcename": "openstreetmap",
+                    "url": "https://www.openstreetmap.org/copyright"
+                },
+                "name": "18th Ward Brewing",
+                "suburb": "Brooklyn",
+                "details": [
+                    "details",
+                    "details.catering",
+                    "details.contact",
+                    "details.facilities"
+                ],
+                "state": "New York",
+                "categories": [
+                    "catering",
+                    "catering.pub",
+                    "dogs",
+                    "dogs.yes",
+                    "production",
+                    "production.brewery"
+                ],
+                "state_code": "NY",
+                "lat": 40.7196016,
+                "place_id": "51c02bddb8207c52c059d4d8bde71b5c4440f00103f9019bbfea41020000009203113138746820576172642042726577696e67"
+            }
+        }
+    ],
+    "accommodation": [
+        {
+            "geometry": {
+                "coordinates": [
+                    -74.01226869998578,
+                    40.703051448286516
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "country": "United States",
+                "distance": 4135,
+                "city": "New York",
+                "formatted": "Hampton, 32 Pearl Street, New York, NY 10004, United States of America",
+                "county": "New York County",
+                "postcode": "10004",
+                "lon": -74.01226378524953,
+                "country_code": "us",
+                "address_line2": "32 Pearl Street, New York, NY 10004, United States of America",
+                "housenumber": "32",
+                "address_line1": "Hampton",
+                "street": "Pearl Street",
+                "datasource": {
+                    "license": "Open Database Licence",
+                    "attribution": "© OpenStreetMap contributors",
+                    "raw": {
+                        "brand:wikidata": "Q5646230",
+                        "payment:mastercard": "yes",
+                        "wheelchair": "designated",
+                        "official_name": "Hampton by Hilton",
+                        "tourism": "hotel",
+                        "branch": "Downtown - Financial Diatrict",
+                        "addr:postcode": 10004,
+                        "building": "hotel",
+                        "payment:american_express": "yes",
+                        "smoking": "no",
+                        "payment:diners_club": "yes",
+                        "brand": "Hampton",
+                        "payment:discover_card": "yes",
+                        "osm_id": 828911214,
+                        "website": "https://www.hilton.com/en/hotels/nycmnhx-hampton-manhattan-downtown-financial-district/",
+                        "internet_access": "wlan",
+                        "payment:unionpay": "yes",
+                        "brand:wikipedia": "en:Hampton by Hilton",
+                        "payment:visa": "yes",
+                        "osm_type": "w",
+                        "alt_name": "Hampton Inn",
+                        "addr:housenumber": 32,
+                        "fitness_centre": "yes",
+                        "phone": "+1 212-480-3500",
+                        "name": "Hampton",
+                        "payment:carte_blanche": "yes",
+                        "addr:street": "Pearl Street",
+                        "breakfast": "yes",
+                        "dog": "yes"
+                    },
+                    "sourcename": "openstreetmap",
+                    "url": "https://www.openstreetmap.org/copyright"
+                },
+                "district": "Financial District",
+                "name": "Hampton",
+                "suburb": "Manhattan",
+                "details": [
+                    "details",
+                    "details.contact",
+                    "details.facilities",
+                    "details.payment"
+                ],
+                "state": "New York",
+                "categories": [
+                    "accommodation",
+                    "accommodation.hotel",
+                    "building",
+                    "building.accommodation",
+                    "dogs",
+                    "dogs.yes",
+                    "internet_access"
+                ],
+                "state_code": "NY",
+                "lat": 40.703039649999994,
+                "place_id": "51044da802c98052c059e4e50097fd594440f00102f9016e2e68310000000092030748616d70746f6e"
+            }
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    -73.9569215,
+                    40.72241180035997
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "country": "United States",
+                "distance": 4536,
+                "city": "New York",
+                "formatted": "The William Vale, 111 North 12th Street, New York, NY 11249, United States of America",
+                "postcode": "11249",
+                "lon": -73.9569215,
+                "country_code": "us",
+                "address_line2": "111 North 12th Street, New York, NY 11249, United States of America",
+                "housenumber": "111",
+                "address_line1": "The William Vale",
+                "street": "North 12th Street",
+                "datasource": {
+                    "license": "Open Database Licence",
+                    "attribution": "© OpenStreetMap contributors",
+                    "raw": {
+                        "osm_id": 4795942922,
+                        "rooms": 183,
+                        "website": "https://www.thewilliamvale.com/",
+                        "internet_access": "yes",
+                        "addr:state": "NY",
+                        "tourism": "hotel",
+                        "addr:postcode": 11249,
+                        "addr:city": "Brooklyn",
+                        "osm_type": "n",
+                        "addr:housenumber": 111,
+                        "phone": "(718) 631-8400",
+                        "name": "The William Vale",
+                        "name:en": "The William Vale",
+                        "addr:street": "North 12th Street",
+                        "dog": "yes"
+                    },
+                    "sourcename": "openstreetmap",
+                    "url": "https://www.openstreetmap.org/copyright"
+                },
+                "district": "Greenpoint",
+                "name": "The William Vale",
+                "suburb": "Brooklyn",
+                "details": [
+                    "details",
+                    "details.accommodation",
+                    "details.contact",
+                    "details.facilities"
+                ],
+                "state": "New York",
+                "categories": [
+                    "accommodation",
+                    "accommodation.hotel",
+                    "dogs",
+                    "dogs.yes",
+                    "internet_access"
+                ],
+                "state_code": "NY",
+                "lat": 40.7224118,
+                "place_id": "51b7d5ac333e7d52c059316568fd775c4440f00103f9010a48dc1d010000009203105468652057696c6c69616d2056616c65"
+            }
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    -73.99984574947031,
+                    40.71977394241193
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "country": "United States",
+                "distance": 4742,
+                "city": "New York",
+                "formatted": "NoMo SoHo, 9 Crosby Street, New York, NY 10013, United States of America",
+                "county": "New York County",
+                "postcode": "10013",
+                "lon": -73.99979875378094,
+                "country_code": "us",
+                "address_line2": "9 Crosby Street, New York, NY 10013, United States of America",
+                "housenumber": "9",
+                "address_line1": "NoMo SoHo",
+                "street": "Crosby Street",
+                "datasource": {
+                    "license": "Open Database Licence",
+                    "attribution": "© OpenStreetMap contributors",
+                    "raw": {
+                        "osm_id": 247892575,
+                        "wheelchair": "yes",
+                        "rooms": 264,
+                        "website": "https://www.nomosoho.com/",
+                        "contact:facebook": "https://facebook.com/thenomosoho",
+                        "internet_access": "wlan",
+                        "tourism": "hotel",
+                        "addr:postcode": 10013,
+                        "building": "hotel",
+                        "operator": "Preferred Hotels and Resorts",
+                        "osm_type": "w",
+                        "addr:housenumber": 9,
+                        "fitness_centre": "yes",
+                        "phone": "+1-646-218-6400",
+                        "contact:instagram": "https://instagram.com/thenomosoho",
+                        "smoking": "no",
+                        "name": "NoMo SoHo",
+                        "addr:street": "Crosby Street",
+                        "dog": "yes",
+                        "email": "info@nomosoho.com",
+                        "height": 11.9
+                    },
+                    "sourcename": "openstreetmap",
+                    "url": "https://www.openstreetmap.org/copyright"
+                },
+                "district": "Manhattan Community Board 2",
+                "name": "NoMo SoHo",
+                "suburb": "Manhattan",
+                "details": [
+                    "details",
+                    "details.accommodation",
+                    "details.building",
+                    "details.contact",
+                    "details.facilities"
+                ],
+                "state": "New York",
+                "categories": [
+                    "accommodation",
+                    "accommodation.hotel",
+                    "building",
+                    "building.accommodation",
+                    "dogs",
+                    "dogs.yes",
+                    "internet_access",
+                    "wheelchair",
+                    "wheelchair.yes"
+                ],
+                "state_code": "NY",
+                "lat": 40.7197524,
+                "place_id": "5141c10679fd7f52c0590c96738d215c4440f00102f9015f8ac60e000000009203094e6f4d6f20536f486f"
+            }
+        }
+    ],
     "leisure": [
         {
             "geometry": {
                 "coordinates": [
-                    -87.69656788831638,
-                    41.913963115340394
+                    -73.9755439971782,
+                    40.69150016895966
                 ],
                 "type": "Point"
             },
             "type": "Feature",
             "properties": {
                 "country": "United States",
-                "city": "Chicago",
-                "formatted": "The 606, Chicago, IL 60647, United States of America",
-                "county": "Cook County",
-                "municipality": "West Chicago Township",
-                "postcode": "60647",
-                "lon": -87.6968115,
+                "distance": 790,
+                "city": "New York",
+                "formatted": "Fort Greene Park, Kings County, New York, New York, United States of America",
+                "lon": -73.9756224254279,
                 "country_code": "us",
-                "address_line2": "Chicago, IL 60647, United States of America",
-                "address_line1": "The 606",
+                "address_line2": "Kings County, New York, New York, United States of America",
+                "address_line1": "Fort Greene Park",
                 "datasource": {
                     "license": "Open Database Licence",
                     "attribution": "© OpenStreetMap contributors",
                     "raw": {
-                        "area": "yes",
-                        "osm_id": 13360336,
-                        "operator:type": "public",
-                        "addr:state": "IL",
-                        "operator:wikidata": "Q2963322",
-                        "operator:wikipedia": "en:Chicago Park District",
-                        "addr:postcode": 60647,
-                        "layer": 2,
-                        "operator": "Chicago Park District",
-                        "addr:city": "Chicago",
-                        "osm_type": "r",
-                        "addr:housenumber": "1600-3750",
-                        "name": "The 606",
-                        "opening_hours": "Mo-Su 06:00-23:00",
-                        "wikipedia": "en:Bloomingdale Trail",
-                        "addr:street": "West Bloomingdale Street",
+                        "osm_id": 20512138,
+                        "osm_type": "w",
+                        "dog:conditional": "unleashed @ 06:00-09:00,21:00-25:00",
+                        "website": "https://www.fortgreenepark.org",
+                        "name": "Fort Greene Park",
+                        "wikipedia": "en:Fort Greene Park",
                         "dog": "leashed",
                         "leisure": "park",
-                        "wikidata": "Q4928316",
-                        "ele": 190
+                        "wikidata": "Q5471253"
                     },
                     "sourcename": "openstreetmap",
                     "url": "https://www.openstreetmap.org/copyright"
                 },
-                "name": "The 606",
-                "suburb": "West Town",
+                "district": "Fort Greene",
+                "name": "Fort Greene Park",
+                "suburb": "Kings County",
                 "details": [
                     "details",
                     "details.facilities",
                     "details.wiki_and_media"
                 ],
-                "state": "Illinois",
+                "state": "New York",
                 "categories": [
                     "dogs",
                     "dogs.leashed",
                     "leisure",
                     "leisure.park"
                 ],
-                "state_code": "IL",
-                "lat": 41.9138723,
-                "place_id": "51cff07a9194ec55c05992114dbefcf44440f00101f901d0dccb000000000092030754686520363036"
+                "state_code": "NY",
+                "lat": 40.691475600000004,
+                "place_id": "5121ec16506f7e52c0591b6ed91383584440f00102f9018afd380100000000920310466f727420477265656e65205061726b"
             }
         },
         {
             "geometry": {
                 "coordinates": [
-                    -87.70992105000002,
-                    41.91877520048008
+                    -73.96961885007168,
+                    40.66138795396956
                 ],
                 "type": "Point"
             },
             "type": "Feature",
             "properties": {
                 "country": "United States",
-                "city": "Chicago",
-                "formatted": "Maple Park, Chicago, IL 60647, United States of America",
-                "county": "Cook County",
-                "municipality": "Jefferson Township",
-                "postcode": "60647",
-                "lon": -87.70992105,
+                "distance": 1182,
+                "city": "New York",
+                "formatted": "Prospect Park, Kings County, New York, New York, United States of America",
+                "lon": -73.97108902901994,
                 "country_code": "us",
-                "address_line2": "Chicago, IL 60647, United States of America",
-                "address_line1": "Maple Park",
+                "address_line2": "Kings County, New York, New York, United States of America",
+                "address_line1": "Prospect Park",
                 "datasource": {
                     "license": "Open Database Licence",
                     "attribution": "© OpenStreetMap contributors",
                     "raw": {
-                        "osm_id": 176300287,
-                        "operator:type": "public",
-                        "addr:state": "IL",
-                        "operator:wikidata": "Q2963322",
-                        "addr:postcode": 60647,
-                        "operator": "Chicago Park District",
-                        "addr:city": "Chicago",
-                        "osm_type": "w",
-                        "name": "Maple Park",
-                        "addr:street": "North Spaulding Avenue",
+                        "osm_id": 9760157,
+                        "osm_type": "r",
+                        "website": "https://www.prospectpark.org/",
+                        "name": "Prospect Park",
+                        "wikipedia": "en:Prospect Park (Brooklyn)",
                         "dog": "leashed",
                         "leisure": "park",
-                        "wikidata": "Q49521434",
-                        "ele": 183
+                        "wikidata": "Q1049632"
                     },
                     "sourcename": "openstreetmap",
                     "url": "https://www.openstreetmap.org/copyright"
                 },
-                "name": "Maple Park",
-                "suburb": "Logan Square",
+                "name": "Prospect Park",
+                "suburb": "Kings County",
                 "details": [
                     "details",
                     "details.facilities",
                     "details.wiki_and_media"
                 ],
-                "state": "Illinois",
+                "state": "New York",
                 "categories": [
                     "dogs",
                     "dogs.leashed",
                     "leisure",
                     "leisure.park"
                 ],
-                "state_code": "IL",
-                "lat": 41.9187752,
-                "place_id": "517e1fb3586fed55c0590938ff6c9af54440f00102f901ff20820a0000000092030a4d61706c65205061726b"
+                "state_code": "NY",
+                "lat": 40.661774300000005,
+                "place_id": "5127a9383c0e7e52c0594122485ca8544440f00101f9019ded94000000000092030d50726f7370656374205061726b"
+            }
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    -73.9520909,
+                    40.71438650035901
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "country": "United States",
+                "distance": 3794,
+                "city": "New York",
+                "formatted": "Macri Triangle, Brooklyn, New York, New York, United States of America",
+                "lon": -73.95204139223884,
+                "country_code": "us",
+                "address_line2": "Brooklyn, New York, New York, United States of America",
+                "address_line1": "Macri Triangle",
+                "datasource": {
+                    "license": "Open Database Licence",
+                    "attribution": "© OpenStreetMap contributors",
+                    "raw": {
+                        "osm_id": 48997911,
+                        "osm_type": "w",
+                        "operator:type": "public",
+                        "operator:wikidata": "Q1894232",
+                        "name": "Macri Triangle",
+                        "opening_hours": "Mo-Su 06:00-01:00",
+                        "operator:wikipedia": "en:New York City Department of Parks and Recreation",
+                        "dog": "yes",
+                        "leisure": "park",
+                        "wikidata": "Q49520521",
+                        "operator": "New York City Department of Parks and Recreation",
+                        "operator:short": "NYC Parks"
+                    },
+                    "sourcename": "openstreetmap",
+                    "url": "https://www.openstreetmap.org/copyright"
+                },
+                "name": "Macri Triangle",
+                "suburb": "Brooklyn",
+                "details": [
+                    "details",
+                    "details.facilities",
+                    "details.wiki_and_media"
+                ],
+                "state": "New York",
+                "categories": [
+                    "dogs",
+                    "dogs.yes",
+                    "leisure",
+                    "leisure.park"
+                ],
+                "state_code": "NY",
+                "lat": 40.714489,
+                "place_id": "516e94ab0eef7c52c05978df4f04715b4440f00102f90117a6eb020000000092030e4d6163726920547269616e676c65"
+            }
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    -74.00830200506196,
+                    40.7072588458734
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "country": "United States",
+                "distance": 4146,
+                "city": "New York",
+                "formatted": "Financial District, Manhattan, New York, New York, United States of America",
+                "county": "New York County",
+                "lon": -74.00830308591628,
+                "country_code": "us",
+                "address_line2": "Manhattan, New York, New York, United States of America",
+                "address_line1": "Financial District",
+                "datasource": {
+                    "license": "Open Database Licence",
+                    "attribution": "© OpenStreetMap contributors",
+                    "raw": {
+                        "osm_id": 504045549,
+                        "osm_type": "w",
+                        "wheelchair": "yes",
+                        "smoking": "no",
+                        "outdoor_seating": "yes",
+                        "dog": "leashed",
+                        "leisure": "park"
+                    },
+                    "sourcename": "openstreetmap",
+                    "url": "https://www.openstreetmap.org/copyright"
+                },
+                "district": "Financial District",
+                "name": "Financial District",
+                "suburb": "Manhattan",
+                "details": ["details.facilities"],
+                "state": "New York",
+                "categories": [
+                    "dogs",
+                    "dogs.leashed",
+                    "leisure",
+                    "leisure.park",
+                    "wheelchair",
+                    "wheelchair.yes"
+                ],
+                "state_code": "NY",
+                "lat": 40.7072595,
+                "place_id": "51df0e2205888052c0599e6a3675875a4440f00102f901ed1f0b1e00000000"
+            }
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    -74.0000252385981,
+                    40.71517146947278
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "country": "United States",
+                "distance": 4231,
+                "city": "New York",
+                "formatted": "Columbus Park, Manhattan, New York, New York, United States of America",
+                "county": "New York County",
+                "lon": -74.00007351605748,
+                "country_code": "us",
+                "address_line2": "Manhattan, New York, New York, United States of America",
+                "address_line1": "Columbus Park",
+                "datasource": {
+                    "license": "Open Database Licence",
+                    "attribution": "© OpenStreetMap contributors",
+                    "raw": {
+                        "osm_id": 66374787,
+                        "osm_type": "w",
+                        "smoking": "no",
+                        "name": "Columbus Park",
+                        "wikipedia": "en:Columbus Park (Manhattan)",
+                        "dog": "leashed",
+                        "leisure": "park",
+                        "wikidata": "Q17299837",
+                        "maintenance": "ok",
+                        "ele": 5
+                    },
+                    "sourcename": "openstreetmap",
+                    "url": "https://www.openstreetmap.org/copyright"
+                },
+                "district": "Five Points",
+                "name": "Columbus Park",
+                "suburb": "Manhattan",
+                "details": [
+                    "details.facilities",
+                    "details.wiki_and_media"
+                ],
+                "state": "New York",
+                "categories": [
+                    "dogs",
+                    "dogs.leashed",
+                    "leisure",
+                    "leisure.park"
+                ],
+                "state_code": "NY",
+                "lat": 40.7149603,
+                "place_id": "5105bddb69008052c0597c351cbd8a5b4440f00102f90183ccf4030000000092030d436f6c756d627573205061726b"
+            }
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    -74.0093909936141,
+                    40.71718073207985
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "country": "United States",
+                "distance": 4989,
+                "city": "New York",
+                "formatted": "Duane Park, Manhattan, New York, New York, United States of America",
+                "county": "New York County",
+                "lon": -74.00933212328925,
+                "country_code": "us",
+                "address_line2": "Manhattan, New York, New York, United States of America",
+                "address_line1": "Duane Park",
+                "datasource": {
+                    "license": "Open Database Licence",
+                    "attribution": "© OpenStreetMap contributors",
+                    "raw": {
+                        "osm_id": 147035202,
+                        "osm_type": "w",
+                        "website": "https://www.nycgovparks.org/parks/duane-park",
+                        "smoking": "no",
+                        "name": "Duane Park",
+                        "opening_hours": "Mo-Su 06:00-01:00",
+                        "wikipedia": "en:Duane Park",
+                        "dog": "leashed",
+                        "leisure": "park",
+                        "wikidata": "Q3950666",
+                        "ele": 5
+                    },
+                    "sourcename": "openstreetmap",
+                    "url": "https://www.openstreetmap.org/copyright"
+                },
+                "district": "Tribeca",
+                "name": "Duane Park",
+                "suburb": "Manhattan",
+                "details": [
+                    "details",
+                    "details.facilities",
+                    "details.wiki_and_media"
+                ],
+                "state": "New York",
+                "categories": [
+                    "dogs",
+                    "dogs.leashed",
+                    "leisure",
+                    "leisure.park"
+                ],
+                "state_code": "NY",
+                "lat": 40.7171264,
+                "place_id": "51c59caedc998052c05959cd0694cc5b4440f00102f9014294c3080000000092030a4475616e65205061726b"
             }
         }
     ],
-    "pet": [{
-        "geometry": {
-            "coordinates": [
-                -87.6338766974647,
-                41.895280301310535
-            ],
-            "type": "Point"
-        },
-        "type": "Feature",
-        "properties": {
-            "country": "United States",
-            "city": "Chicago",
-            "formatted": "North Wells Street, Chicago, IL 60654, United States of America",
-            "county": "Cook County",
-            "postcode": "60654",
-            "lon": -87.63387674884949,
-            "country_code": "us",
-            "address_line2": "Chicago, IL 60654, United States of America",
-            "address_line1": "North Wells Street",
-            "street": "North Wells Street",
-            "datasource": {
-                "license": "Open Database Licence",
-                "attribution": "© OpenStreetMap contributors",
-                "raw": {
-                    "osm_id": 787821282,
-                    "osm_type": "w",
-                    "dog": "yes",
-                    "leisure": "dog_park"
-                },
-                "sourcename": "openstreetmap",
-                "url": "https://www.openstreetmap.org/copyright"
+    "pet": [
+        {
+            "geometry": {
+                "coordinates": [
+                    -73.97133671703655,
+                    40.64908599942259
+                ],
+                "type": "Point"
             },
-            "district": "River North",
-            "details": ["details.facilities"],
-            "state": "Illinois",
-            "categories": [
-                "dogs",
-                "dogs.yes",
-                "pet",
-                "pet.dog_park"
-            ],
-            "state_code": "IL",
-            "lat": 41.89528025,
-            "place_id": "51ac53916f91e855c059de707f8b98f24440f00102f901e232f52e00000000"
+            "type": "Feature",
+            "properties": {
+                "country": "United States",
+                "distance": 3745,
+                "city": "New York",
+                "formatted": "Kensington Dog Run, Coney Island Avenue, New York, NY 11235, United States of America",
+                "postcode": "11235",
+                "lon": -73.97132335113636,
+                "country_code": "us",
+                "address_line2": "Coney Island Avenue, New York, NY 11235, United States of America",
+                "address_line1": "Kensington Dog Run",
+                "street": "Coney Island Avenue",
+                "datasource": {
+                    "license": "Open Database Licence",
+                    "attribution": "© OpenStreetMap contributors",
+                    "raw": {
+                        "osm_id": 714776545,
+                        "osm_type": "w",
+                        "operator:type": "private_non_profit",
+                        "website": "https://www.kensingtondogrun.com",
+                        "access": "yes",
+                        "barrier": "fence",
+                        "name": "Kensington Dog Run",
+                        "dog": "yes",
+                        "leisure": "dog_park",
+                        "wikidata": "Q115628773",
+                        "email": "kensingtondogrun@gmail.com",
+                        "operator": "Kensington Dog Run Association"
+                    },
+                    "sourcename": "openstreetmap",
+                    "url": "https://www.openstreetmap.org/copyright"
+                },
+                "district": "Kensington",
+                "name": "Kensington Dog Run",
+                "suburb": "Brooklyn",
+                "details": [
+                    "details",
+                    "details.contact",
+                    "details.facilities",
+                    "details.wiki_and_media"
+                ],
+                "state": "New York",
+                "categories": [
+                    "access",
+                    "access.yes",
+                    "dogs",
+                    "dogs.yes",
+                    "pet",
+                    "pet.dog_park"
+                ],
+                "state_code": "NY",
+                "lat": 40.64907025,
+                "place_id": "51dd447a612a7e52c059dfe7014015534440f00102f901e19f9a2a000000009203124b656e73696e67746f6e20446f672052756e"
+            }
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    -73.9361109760067,
+                    40.71540774144776
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "country": "United States",
+                "distance": 4630,
+                "city": "New York",
+                "formatted": "Cooper Park Dog Run, Sharon Street, New York, NY 11211, United States of America",
+                "postcode": "11211",
+                "lon": -73.93612180589587,
+                "country_code": "us",
+                "address_line2": "Sharon Street, New York, NY 11211, United States of America",
+                "address_line1": "Cooper Park Dog Run",
+                "street": "Sharon Street",
+                "datasource": {
+                    "license": "Open Database Licence",
+                    "attribution": "© OpenStreetMap contributors",
+                    "raw": {
+                        "osm_id": 1147069100,
+                        "osm_type": "w",
+                        "operator:type": "public",
+                        "access": "yes",
+                        "name": "Cooper Park Dog Run",
+                        "opening_hours": "06:00-01:00",
+                        "dog": "yes",
+                        "leisure": "dog_park",
+                        "operator": "NYC parks"
+                    },
+                    "sourcename": "openstreetmap",
+                    "url": "https://www.openstreetmap.org/copyright"
+                },
+                "name": "Cooper Park Dog Run",
+                "suburb": "Brooklyn",
+                "details": [
+                    "details",
+                    "details.facilities"
+                ],
+                "state": "New York",
+                "categories": [
+                    "access",
+                    "access.yes",
+                    "dogs",
+                    "dogs.yes",
+                    "pet",
+                    "pet.dog_park"
+                ],
+                "state_code": "NY",
+                "lat": 40.7153862,
+                "place_id": "5107d8023ee97b52c05964691a7b925b4440f00102f901ace25e4400000000920313436f6f706572205061726b20446f672052756e"
+            }
         }
-    }]
+    ],
+    "building": [
+        {
+            "geometry": {
+                "coordinates": [
+                    -73.96171587849503,
+                    40.71349881563276
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "country": "United States",
+                "distance": 3474,
+                "city": "New York",
+                "formatted": "Lucky Dog, 303 Bedford Avenue, New York, NY 11211, United States of America",
+                "postcode": "11211",
+                "lon": -73.96171591320413,
+                "country_code": "us",
+                "address_line2": "303 Bedford Avenue, New York, NY 11211, United States of America",
+                "housenumber": "303",
+                "address_line1": "Lucky Dog",
+                "street": "Bedford Avenue",
+                "datasource": {
+                    "license": "Open Database Licence",
+                    "attribution": "© OpenStreetMap contributors",
+                    "raw": {
+                        "osm_id": 241837928,
+                        "amenity": "pub",
+                        "addr:state": "NY",
+                        "addr:postcode": 11211,
+                        "building": "yes",
+                        "addr:city": "Brooklyn",
+                        "osm_type": "w",
+                        "addr:housenumber": 303,
+                        "name": "Lucky Dog",
+                        "addr:street": "Bedford Avenue",
+                        "outdoor_seating": "yes",
+                        "dog": "yes",
+                        "height": 11.7
+                    },
+                    "sourcename": "openstreetmap",
+                    "url": "https://www.openstreetmap.org/copyright"
+                },
+                "name": "Lucky Dog",
+                "suburb": "Brooklyn",
+                "details": [
+                    "details.building",
+                    "details.catering",
+                    "details.facilities"
+                ],
+                "state": "New York",
+                "categories": [
+                    "building",
+                    "building.catering",
+                    "catering",
+                    "catering.pub",
+                    "dogs",
+                    "dogs.yes"
+                ],
+                "state_code": "NY",
+                "lat": 40.71349884999999,
+                "place_id": "51868bc1c08c7d52c0595070dfed535b4440f00102f90168276a0e000000009203094c75636b7920446f67",
+                "quarter": "Williamsburg"
+            }
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    -74.01226869998578,
+                    40.703051448286516
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "country": "United States",
+                "distance": 4135,
+                "city": "New York",
+                "formatted": "Hampton, 32 Pearl Street, New York, NY 10004, United States of America",
+                "county": "New York County",
+                "postcode": "10004",
+                "lon": -74.01226378524953,
+                "country_code": "us",
+                "address_line2": "32 Pearl Street, New York, NY 10004, United States of America",
+                "housenumber": "32",
+                "address_line1": "Hampton",
+                "street": "Pearl Street",
+                "datasource": {
+                    "license": "Open Database Licence",
+                    "attribution": "© OpenStreetMap contributors",
+                    "raw": {
+                        "brand:wikidata": "Q5646230",
+                        "payment:mastercard": "yes",
+                        "wheelchair": "designated",
+                        "official_name": "Hampton by Hilton",
+                        "tourism": "hotel",
+                        "branch": "Downtown - Financial Diatrict",
+                        "addr:postcode": 10004,
+                        "building": "hotel",
+                        "payment:american_express": "yes",
+                        "smoking": "no",
+                        "payment:diners_club": "yes",
+                        "brand": "Hampton",
+                        "payment:discover_card": "yes",
+                        "osm_id": 828911214,
+                        "website": "https://www.hilton.com/en/hotels/nycmnhx-hampton-manhattan-downtown-financial-district/",
+                        "internet_access": "wlan",
+                        "payment:unionpay": "yes",
+                        "brand:wikipedia": "en:Hampton by Hilton",
+                        "payment:visa": "yes",
+                        "osm_type": "w",
+                        "alt_name": "Hampton Inn",
+                        "addr:housenumber": 32,
+                        "fitness_centre": "yes",
+                        "phone": "+1 212-480-3500",
+                        "name": "Hampton",
+                        "payment:carte_blanche": "yes",
+                        "addr:street": "Pearl Street",
+                        "breakfast": "yes",
+                        "dog": "yes"
+                    },
+                    "sourcename": "openstreetmap",
+                    "url": "https://www.openstreetmap.org/copyright"
+                },
+                "district": "Financial District",
+                "name": "Hampton",
+                "suburb": "Manhattan",
+                "details": [
+                    "details",
+                    "details.contact",
+                    "details.facilities",
+                    "details.payment"
+                ],
+                "state": "New York",
+                "categories": [
+                    "accommodation",
+                    "accommodation.hotel",
+                    "building",
+                    "building.accommodation",
+                    "dogs",
+                    "dogs.yes",
+                    "internet_access"
+                ],
+                "state_code": "NY",
+                "lat": 40.703039649999994,
+                "place_id": "51044da802c98052c059e4e50097fd594440f00102f9016e2e68310000000092030748616d70746f6e"
+            }
+        },
+        {
+            "geometry": {
+                "coordinates": [
+                    -73.99984574947031,
+                    40.71977394241193
+                ],
+                "type": "Point"
+            },
+            "type": "Feature",
+            "properties": {
+                "country": "United States",
+                "distance": 4742,
+                "city": "New York",
+                "formatted": "NoMo SoHo, 9 Crosby Street, New York, NY 10013, United States of America",
+                "county": "New York County",
+                "postcode": "10013",
+                "lon": -73.99979875378094,
+                "country_code": "us",
+                "address_line2": "9 Crosby Street, New York, NY 10013, United States of America",
+                "housenumber": "9",
+                "address_line1": "NoMo SoHo",
+                "street": "Crosby Street",
+                "datasource": {
+                    "license": "Open Database Licence",
+                    "attribution": "© OpenStreetMap contributors",
+                    "raw": {
+                        "osm_id": 247892575,
+                        "wheelchair": "yes",
+                        "rooms": 264,
+                        "website": "https://www.nomosoho.com/",
+                        "contact:facebook": "https://facebook.com/thenomosoho",
+                        "internet_access": "wlan",
+                        "tourism": "hotel",
+                        "addr:postcode": 10013,
+                        "building": "hotel",
+                        "operator": "Preferred Hotels and Resorts",
+                        "osm_type": "w",
+                        "addr:housenumber": 9,
+                        "fitness_centre": "yes",
+                        "phone": "+1-646-218-6400",
+                        "contact:instagram": "https://instagram.com/thenomosoho",
+                        "smoking": "no",
+                        "name": "NoMo SoHo",
+                        "addr:street": "Crosby Street",
+                        "dog": "yes",
+                        "email": "info@nomosoho.com",
+                        "height": 11.9
+                    },
+                    "sourcename": "openstreetmap",
+                    "url": "https://www.openstreetmap.org/copyright"
+                },
+                "district": "Manhattan Community Board 2",
+                "name": "NoMo SoHo",
+                "suburb": "Manhattan",
+                "details": [
+                    "details",
+                    "details.accommodation",
+                    "details.building",
+                    "details.contact",
+                    "details.facilities"
+                ],
+                "state": "New York",
+                "categories": [
+                    "accommodation",
+                    "accommodation.hotel",
+                    "building",
+                    "building.accommodation",
+                    "dogs",
+                    "dogs.yes",
+                    "internet_access",
+                    "wheelchair",
+                    "wheelchair.yes"
+                ],
+                "state_code": "NY",
+                "lat": 40.7197524,
+                "place_id": "5141c10679fd7f52c0590c96738d215c4440f00102f9015f8ac60e000000009203094e6f4d6f20536f486f"
+            }
+        }
+    ]
 }

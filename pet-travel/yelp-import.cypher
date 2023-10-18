@@ -11,9 +11,15 @@ UNWIND apiCategories as apiCategory
 WITH value[apiCategory] as places
 UNWIND places as place
 MERGE (p:Place {id: place.id})
-  SET p.name = place.name, p.url = place.url, p.imageUrl = place.image_url, p.phone = p.display_phone, p.lat = place.coordinates.latitude, p.lon = place.coordinates.longitude, p.reviewCount = place.review_count, p.rating = place.rating, p.address = place.location.address1, p.city = place.location.city, p.state = place.location.state, p.postalCode = place.location.zip_code, p.country = place.location.country
+  SET p.name = place.name, p.url = place.url, p.imageUrl = place.image_url, p.phone = p.display_phone, p.lat = toFloat(place.coordinates.latitude), p.lon = toFloat(place.coordinates.longitude), p.reviewCount = place.review_count, p.rating = place.rating, p.address = place.location.address1, p.city = place.location.city, p.state = place.location.state, p.postalCode = place.location.zip_code, p.country = place.location.country
 WITH p
 RETURN * LIMIT 50;
+
+//fix typo in 1 Brooklyn place
+MATCH (p:Place)
+WHERE p.city = "Brookyln"
+SET p.city = "Brooklyn"
+RETURN p;
 
 //hydrate the category nodes and create subcategory paths
 WITH "https://s3.amazonaws.com/cdn.neo4jlabs.com/data/petTravel/yelpApi.json" as url
