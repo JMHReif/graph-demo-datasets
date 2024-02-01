@@ -4,7 +4,7 @@
 
 = Goodreads UCSD
 
-This data is sourced from the https://sites.google.com/eng.ucsd.edu/ucsdbookgraph/home?authuser=0[UCSD Book Graph project^], which contains JSON files of data from Goodreads with books, authors, reviews, users, and more.
+This data is sourced from the https://mengtingwan.github.io/data/goodreads.html[UCSD Book Graph project^], which contains JSON files of data from Goodreads with books, authors, reviews, users, and more.
 
 The files included in this repository are subsets of the UCSD full version of the data that the owner of this repository tailored to this particular demo. However, the whole data set may be used or referenced at some point in the future.
 
