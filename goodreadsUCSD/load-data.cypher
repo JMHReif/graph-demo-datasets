@@ -41,7 +41,7 @@ MERGE (a)-[w:AUTHORED]->(b);
 //14215 AUTHORED relationships
 
 //Load Reviews
-:auto CALL apoc.load.json("https://data.neo4j.com/goodreads/goodreads_reviews_dedup.json.gz") YIELD value as review
+CALL apoc.load.json("https://data.neo4j.com/goodreads/goodreads_reviews_dedup.json.gz") YIELD value as review
 CALL { WITH review
  MATCH (b:Book) WHERE b.book_id = review.book_id
  WITH review, b
@@ -53,7 +53,7 @@ CALL { WITH review
 //69791 WRITTEN_FOR relationships
 
 //Clean up Book properties
-:auto MATCH (b:Book)
+MATCH (b:Book)
 CALL {
     WITH b
      SET b.ratings_count = toInteger(b.ratings_count),
@@ -63,7 +63,7 @@ CALL {
 //30000 Book properties updated
 
 //Clean up Review properties
-:auto MATCH (r:Review)
+MATCH (r:Review)
 CALL {
     WITH r
      SET r.date_added = datetime(apoc.date.convertFormat(r.date_added, 'EEE LLL dd HH:mm:ss Z yyyy', 'iso_offset_date_time')),
@@ -74,7 +74,7 @@ CALL {
 //249836 Review properties updated
 
 //Separate User nodes from Review nodes
-:auto MATCH (r:Review)
+MATCH (r:Review)
 WHERE r.user_id IS NOT NULL
 CALL {
     WITH r
@@ -87,13 +87,13 @@ CALL {
 // To delete all the data:
 
 // // Delete all relationships 
-// :auto MATCH ()-[r]-() 
+// MATCH ()-[r]-() 
 // CALL { WITH r 
 // DELETE r 
 // } IN TRANSACTIONS OF 50000 ROWS;
 
 // // Delete all nodes
-// :auto MATCH (n) 
+// MATCH (n) 
 // CALL { WITH n 
 // DETACH DELETE n 
 // } IN TRANSACTIONS OF 50000 ROWS;
