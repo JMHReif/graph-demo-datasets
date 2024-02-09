@@ -16,3 +16,10 @@ Citations for the original creators of this material are included below:
 == Data Model
 
 image:{img}/goodreads-ucsd-data-model.png[]
+
+== AI Embeddings folder
+
+There is a separate folder with slightly altered data load script and a Python embedding generator script.
+
+* The load script in the `ai-embeddings` folder accommodates property and index name requirements for https://docs.spring.io/spring-ai/reference/api/vectordbs/neo4j.html[Spring AI with Neo4j^] - properties need to be named `id` and `text`, and the index name has to be `spring-ai-document-index`.
+* The `generate-embeddings.py` script is a Python script that pulls the text of book reviews from Neo4j, calls the https://platform.openai.com/docs/guides/embeddings/what-are-embeddings?lang=python[OpenAI API^] to generate embeddings, and then stores the embeddings back in Neo4j. To run this script, you will need to have an OpenAI API key and set it to the `openai_key` variable in the script, as well as credentials for a Neo4j database (such as an https://dev.neo4j.com/aura-java[Aura free-tier instance^]).
