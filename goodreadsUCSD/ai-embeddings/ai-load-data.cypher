@@ -75,6 +75,9 @@ CALL {
 } in transactions of 20000 rows;
 //249836 Review properties updated
 
+//Add embeddings to Review nodes
+
+
 //Separate User nodes from Review nodes
 MATCH (r:Review)
 WHERE r.user_id IS NOT NULL
@@ -85,6 +88,11 @@ CALL {
     MERGE (r)<-[:PUBLISHED]-(u)
 } in transactions of 20000 rows;
 //14230 User nodes added
+
+//Load embeddings to Review nodes
+LOAD CSV WITH HEADERS FROM "https://data.neo4j.com/goodreads/review_embeddings.csv" as row
+// TODO: Add in Cypher to add embeddings to Review nodes
+RETURN row LIMIT 2
 
 // To delete all the data:
 
