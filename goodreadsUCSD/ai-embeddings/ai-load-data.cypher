@@ -90,9 +90,16 @@ CALL {
 //14230 User nodes added
 
 //Load embeddings to Review nodes
-LOAD CSV WITH HEADERS FROM "https://data.neo4j.com/goodreads/review_embeddings.csv" as row
-// TODO: Add in Cypher to add embeddings to Review nodes
-RETURN row LIMIT 2
+LOAD CSV WITH HEADERS FROM "https://data.neo4j.com/goodreads/review_embeddings.psv" as row
+FIELDTERMINATOR '|'
+CALL {
+    WITH row
+    MATCH (r:Review {review_id: row.reviewId})
+    SET r.embedding = row.embedding
+    RETURN r
+} in transactions of 1000 rows
+WITH r
+RETURN count(r);
 
 // To delete all the data:
 
