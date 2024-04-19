@@ -10,6 +10,13 @@ CREATE CONSTRAINT FOR (u:User) REQUIRE u.user_id IS UNIQUE;
 
 CREATE INDEX FOR (r:Review) ON (r.user_id);
 
+CREATE VECTOR INDEX `review-embedding-index` IF NOT EXISTS 
+FOR (r:Review) ON (r.embedding)
+OPTIONS {indexConfig: {
+ `vector.dimensions`: 1536,
+ `vector.similarity_function`: 'cosine'
+}};
+
 //Load 10,000 books
 CALL apoc.load.json("https://data.neo4j.com/goodreads/goodreads_books_10k.json") YIELD value as book
 MERGE (b:Book {book_id: book.book_id})
