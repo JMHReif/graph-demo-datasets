@@ -82,9 +82,6 @@ CALL {
 } in transactions of 20000 rows;
 //249836 Review properties updated
 
-//Add embeddings to Review nodes
-
-
 //Separate User nodes from Review nodes
 MATCH (r:Review)
 WHERE r.user_id IS NOT NULL
@@ -102,7 +99,7 @@ FIELDTERMINATOR '|'
 CALL {
     WITH row
     MATCH (r:Review {review_id: row.reviewId})
-    SET r.embedding = row.embedding
+    CALL db.create.setNodeVectorProperty(r, 'embedding', apoc.convert.fromJsonList(row.embedding))
     RETURN r
 } in transactions of 1000 rows
 WITH r
@@ -114,10 +111,10 @@ RETURN count(r);
 // MATCH ()-[r]-() 
 // CALL { WITH r 
 // DELETE r 
-// } IN TRANSACTIONS OF 50000 ROWS;
+// } IN TRANSACTIONS OF 5000 ROWS;
 
 // // Delete all nodes
 // MATCH (n) 
 // CALL { WITH n 
 // DETACH DELETE n 
-// } IN TRANSACTIONS OF 50000 ROWS;
+// } IN TRANSACTIONS OF 5000 ROWS;
