@@ -43,6 +43,16 @@ CALL {
 } in transactions of 20000 rows;
 //30000 Book properties updated
 
+//Clean up Author properties
+:auto MATCH (a:Author)
+CALL {
+    WITH a
+     SET a.ratings_count = toInteger(a.ratings_count),
+     a.text_reviews_count = toInteger(a.text_reviews_count),
+     a.average_rating = toInteger(a.average_rating)
+} in transactions of 20000 rows;
+//30000 Book properties updated
+
 // To delete all the data:
 
 // // Delete all relationships 
