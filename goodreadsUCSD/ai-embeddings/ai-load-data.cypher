@@ -20,7 +20,7 @@ OPTIONS {indexConfig: {
 //Load 10,000 books
 CALL apoc.load.json("https://data.neo4j.com/goodreads/goodreads_books_10k.json") YIELD value as book
 MERGE (b:Book {book_id: book.book_id})
-SET b += apoc.map.clean(book, ['authors'],[""]);
+SET b += apoc.map.clean(book, ['authors','similar_books'],[""]);
 //10000 Book nodes
 
 //Import initial authors for 10k books
@@ -46,6 +46,17 @@ UNWIND book.authors as author
 MATCH (a:Author {author_id: author.author_id})
 MERGE (a)-[w:AUTHORED]->(b);
 //14215 AUTHORED relationships
+
+//Load similar books
+CALL apoc.load.json("https://data.neo4j.com/goodreads/goodreads_books_10k.json") YIELD value as book
+WITH book
+MATCH (b:Book {book_id: book.book_id})
+WITH book, b
+WHERE book.similar_books IS NOT NULL
+UNWIND book.similar_books as similarBookId
+MATCH (b2:Book {book_id: similarBookId})
+MERGE (b)-[r:SIMILAR_TO]->(b2);
+//424 SIMILAR_TO relationships
 
 //Load Reviews
 CALL apoc.load.json("https://data.neo4j.com/goodreads/goodreads_reviews_dedup.json.gz") YIELD value as review

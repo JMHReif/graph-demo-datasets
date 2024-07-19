@@ -1,7 +1,7 @@
 //NOTE: This script loads subset of full data set (based on 10k books)
 //Total loaded data size:
-//92162 nodes
-//84006 relationships
+//136989 nodes
+//140006 relationships
 
 CREATE CONSTRAINT FOR (b:Book) REQUIRE b.book_id IS UNIQUE;
 CREATE CONSTRAINT FOR (a:Author) REQUIRE a.author_id IS UNIQUE;
@@ -13,7 +13,7 @@ CREATE INDEX FOR (r:Review) ON (r.user_id);
 //Load 10,000 books
 CALL apoc.load.json("https://data.neo4j.com/goodreads/goodreads_books_10k.json") YIELD value as book
 MERGE (b:Book {book_id: book.book_id})
-SET b += apoc.map.clean(book, ['authors'],[""]);
+SET b += apoc.map.clean(book, ['authors','similar_books'],[""]);
 //10000 Book nodes
 
 //Import initial authors for 10k books
@@ -39,6 +39,17 @@ UNWIND book.authors as author
 MATCH (a:Author {author_id: author.author_id})
 MERGE (a)-[w:AUTHORED]->(b);
 //14215 AUTHORED relationships
+
+//Load similar books
+CALL apoc.load.json("https://data.neo4j.com/goodreads/goodreads_books_10k.json") YIELD value as book
+WITH book
+MATCH (b:Book {book_id: book.book_id})
+WITH book, b
+WHERE book.similar_books IS NOT NULL
+UNWIND book.similar_books as similarBookId
+MATCH (b2:Book {book_id: similarBookId})
+MERGE (b)-[r:SIMILAR_TO]->(b2);
+//424 SIMILAR_TO relationships
 
 //Load Reviews
 CALL apoc.load.json("https://data.neo4j.com/goodreads/goodreads_reviews_dedup.json.gz") YIELD value as review
@@ -71,7 +82,7 @@ CALL {
      r.started_at = datetime(apoc.date.convertFormat(r.started_at, 'EEE LLL dd HH:mm:ss Z yyyy', 'iso_offset_date_time')),
      r.read_at = datetime(apoc.date.convertFormat(r.read_at, 'EEE LLL dd HH:mm:ss Z yyyy', 'iso_offset_date_time'))
 } in transactions of 20000 rows;
-//249836 Review properties updated
+//279164 Review properties updated
 
 //Separate User nodes from Review nodes
 MATCH (r:Review)
@@ -82,7 +93,7 @@ CALL {
     WITH r, u
     MERGE (r)<-[:PUBLISHED]-(u)
 } in transactions of 20000 rows;
-//14230 User nodes added
+//44827 User nodes added
 
 // To delete all the data:
 
