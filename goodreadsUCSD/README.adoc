@@ -15,7 +15,14 @@ Citations for the original creators of this material are included below:
 
 == Data Model
 
-image:{img}/goodreads-ucsd-data-model.png[]
+image:{img}/goodreads-data-model.png[]
+
+There are currently a few different sizes/renditions of data sets available in this repository:
+
+* `10k-books` - a subset of the full data set with 10,000 books
+* `50k-books-ai` - a subset of the full data set with 50,000 books, includes code to generate embeddings
+* `ai-embeddings` - the 10,000 books set with additional data for loading embeddings for use in AI applications
+* _(Coming soon!)_ `full` - the full data set with all 2.3 million books
 
 == AI Embeddings folder
 
