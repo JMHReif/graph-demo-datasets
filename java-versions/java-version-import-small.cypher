@@ -6,7 +6,7 @@ CREATE INDEX version_diff FOR (v:VersionDiff) ON (v.fromVersion, v.toVersion);
 
 //Queries:
 //1) Load Java versions
-WITH [1.0,1.1,1.2,1.3,1.4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20] as versions
+WITH [1.0,1.1,1.2,1.3,1.4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24] as versions
 CALL apoc.periodic.iterate('UNWIND $versions as version RETURN version',
     'CALL apoc.load.json("https://raw.githubusercontent.com/marchof/java-almanac/master/site/data/jdk/versions/"+version+".json")
     YIELD value
@@ -19,7 +19,7 @@ CALL apoc.periodic.iterate('UNWIND $versions as version RETURN version',
     {batchSize: 50, iterateList:false, params:{versions:versions}})
 YIELD batches, total, timeTaken, committedOperations, failedOperations, failedBatches , retries, errorMessages , batch , operations, wasTerminated
 RETURN batches, total, timeTaken, committedOperations, failedOperations, failedBatches , retries, errorMessages , batch , operations, wasTerminated;
-//Total nodes: 20
+//Total nodes: 24
 //Total rels: 0
 
 //2) Load Java version diffs for each version
@@ -44,5 +44,5 @@ CALL apoc.periodic.iterate('MATCH (j:JavaVersion)
     RETURN count(*)', {batchSize: 500, iterateList:false})
 YIELD batches, total, timeTaken, committedOperations, failedOperations, failedBatches , retries, errorMessages , batch , operations, wasTerminated
 RETURN batches, total, timeTaken, committedOperations, failedOperations, failedBatches , retries, errorMessages , batch , operations, wasTerminated;
-//Total nodes: 191
-//Total rels: 684
+//Total nodes: 301
+//Total rels: 552
