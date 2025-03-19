@@ -76,7 +76,7 @@ CALL {
     WITH b
      SET b.ratings_count = toInteger(b.ratings_count),
      b.text_reviews_count = toInteger(b.text_reviews_count),
-     b.average_rating = toInteger(b.average_rating)
+     b.average_rating = toFloat(b.average_rating)
 } in transactions of 20000 rows;
 //30000 Book properties updated
 
