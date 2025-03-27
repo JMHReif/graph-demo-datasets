@@ -24,20 +24,20 @@ RETURN p;
 //hydrate the category nodes and create subcategory paths
 WITH "https://s3.amazonaws.com/cdn.neo4jlabs.com/data/petTravel/yelpApi.json" as url
 CALL apoc.load.json(url) YIELD value
-WITH value, keys(value) as apiCategories
-UNWIND apiCategories as apiCategory
-MERGE (c:Category {name: apiCategory})
-WITH c, apiCategory, value[apiCategory] as places
-UNWIND places as place
-WITH c, apiCategory, place, place.categories as subcats
-UNWIND subcats as subcat
-MATCH (c:Category {name: apiCategory})
-MATCH (p:Place {id: place.id})
-MERGE (s:Subcategory {name: subcat.alias})
- SET s.title = subcat.title
-MERGE (c)-[r:CONTAINS]->(s)
-MERGE (s)-[r2:CONTAINS]->(p)
-RETURN * LIMIT 50;
+CALL (value) {
+    WITH keys(value) as apiCategories
+    UNWIND apiCategories as apiCategory
+    MERGE (c:Category {name: apiCategory})
+    WITH c, value[apiCategory] as places
+    UNWIND places as place
+    MATCH (p:Place {id: place.id})
+    WITH c, p, place.categories as subcats
+    UNWIND subcats as subcat
+    MERGE (s:Subcategory {name: subcat.alias})
+        SET s.title = subcat.title
+    MERGE (c)-[r:CONTAINS]->(s)
+    MERGE (s)-[r2:CONTAINS]->(p)
+} IN TRANSACTIONS OF 100 ROWS;
 
 //review graph data model
 CALL apoc.meta.graph();

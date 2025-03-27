@@ -10,18 +10,18 @@ WITH value, keys(value) as apiCategories
 UNWIND apiCategories as apiCategory
 WITH value[apiCategory] as places
 UNWIND places as place
-WITH place.properties as props
+WITH place, place.properties as props
 MERGE (p:Place {id: props.place_id})
   SET p.address = props.street, p.city = props.city, p.state = props.state, p.postalCode = props.postcode, p.country = props.country, p.lat = toFloat(props.lat), p.lon = toFloat(props.lon)
-WITH p, props, CASE
+WITH place, p, props, CASE
  WHEN props.name IS NULL THEN props.address_line1
  ELSE props.name
 END as placeName
  SET p.name = placeName
-WITH p, props, props.datasource.raw as info
+WITH place, p, props, props.datasource.raw as info
 WHERE info.description IS NOT NULL
   SET p.description = info.description
-WITH p, props, info
+WITH place, p, props, info
 WHERE info.website IS NOT NULL
   SET p.website = info.website
 WITH p, place.properties.categories as subcats

@@ -183,16 +183,29 @@ CALL apoc.periodic.iterate(
 YIELD batches, total, errorMessages
 RETURN batches, total, errorMessages;
 
-//Generate embeddings for Review nodes
-CALL apoc.periodic.iterate(
-    'MATCH (r:Review WHERE r.text IS NOT NULL AND r.embedding IS NULL)
-    RETURN r',
-    'WITH collect(r) as reviews
-    CALL apoc.ml.openai.embedding([r in reviews | r.text],$token,{model: "text-embedding-3-small"}) YIELD index, embedding
-    CALL db.create.setNodeVectorProperty(reviews[index], "embedding", embedding);',
-    {batchSize:100, params:{token:$token}})
-YIELD batches, total, errorMessages
-RETURN batches, total, errorMessages;
+//Generate embeddings for Review nodes (batched by 1000, run multiple times)
+MATCH (r:Review WHERE r.text IS NOT NULL AND r.embedding IS NULL)
+LIMIT 1000
+WITH collect(r) AS reviewsList,
+     count(*) AS total,
+     100 AS batchSize
+UNWIND range(0, total-1, batchSize) AS batchStart
+CALL (reviewsList, batchStart, batchSize) {
+    WITH [review IN reviewsList[batchStart .. batchStart + batchSize] | review.text] AS batch
+    CALL genai.vector.encodeBatch(batch, 'OpenAI', { token: $token, model: "text-embedding-3-small" }) YIELD index, vector
+    CALL db.create.setNodeVectorProperty(reviewsList[batchStart + index], 'embedding', vector)
+} IN CONCURRENT TRANSACTIONS OF 1 ROW;
+// //Alternative (Christoff says it errors out after 16 batches?)
+// MATCH (r:Review)
+// WITH COUNT(r) AS total
+// UNWIND range(0, total-1, 100) AS batchStart
+// CALL() {
+//   MATCH (r:Review WHERE r.text IS NOT NULL AND r.embedding IS NULL)
+//   LIMIT 100
+//   WITH collect(r.text) AS batch, collect(r) AS reviewsList
+//   CALL genai.vector.encodeBatch(batch, "OpenAI", { token: $token, model: "text-embedding-3-small" }) YIELD index, vector
+//   CALL db.create.setNodeVectorProperty(reviewsList[index], "embedding", vector)
+// } IN TRANSACTIONS OF 1 ROW;
 
 // To delete all the data:
 // // Delete all relationships 
