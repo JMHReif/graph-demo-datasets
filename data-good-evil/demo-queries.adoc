@@ -1,0 +1,99 @@
+= Example Queries
+
+A few queries to explore the data and show how same data could be used for beneficial or harmful uses.
+
+== Scenario #1 - credit card fraudulent charges
+
+=== Good:
+* uses patterns, location, amounts, etc to catch unusual transactions
+* identify potential fraud quickly
+* reduces financial burdens for customer and credit card company
+
+[source,cypher]
+----
+//Find last true transaction with staff who took order
+MATCH (c:Customer)-[rel]-(o:Order)-[rel2]-(p:Product)
+RETURN o.transactionId, o.orderDate, o.orderTime, o.staffId
+ORDER BY o.orderDate DESC
+LIMIT 5;
+----
+
+=== Bad:
+* can track habits / schedules and changes (is store close to home or to grocery store?)
+* demographic and/or location data for categorizing likes/trends/habits
+* make assumptions about or influence lifestyle, wants, and needs
+
+[source,cypher]
+----
+//Find customer generation with order dates and times
+MATCH (c:Customer)-[rel]-(o:Order)-[rel2]-(p:Product)
+OPTIONAL MATCH (c)-[r3:BORN_IN]-(b:BirthYear)-[r4:FALLs_IN]-(g:Generation)
+RETURN c.customerId, g.name, o.orderDate, o.orderTime
+ORDER BY o.orderDate DESC, o.orderTime DESC
+LIMIT 5;
+----
+
+[source,cypher]
+----
+//Find locations of stores visited and when (long/lat on Store)
+MATCH (c:Customer)-[rel]-(o:Order)-[rel2]-(s:Store)-[rel3]-(other)
+OPTIONAL MATCH (c)-[rel4:LIVES_IN]->(c2:City)
+RETURN * LIMIT 50;
+----
+
+== Scenario #2 - providing products customers need
+
+=== Good:
+* ensure inventory and shelving is optimized for customer favorites
+* check rules and habits before potentially recommending something sensitive/offensive
+
+[source,cypher]
+----
+//Ensure inventory for customer’s commonly ordered products
+MATCH (c:Customer)-[rel]-(o:Order)-[rel2]-(gp:GroceryProduct)-[rel3]-(gc:GroceryCategory)
+RETURN gp.productName, count(o) as timesOrdered
+ORDER BY timesOrdered DESC LIMIT 10;
+----
+
+[source,cypher]
+----
+//Check dietary restrictions for product recommendations (could look for products in categories that are true/false for common allergens)
+MATCH (c:Customer)-[rel]-(o:Order)-[rel2]-(gp:GroceryProduct)-[rel3]-(gc:GroceryCategory)
+RETURN gp.productName, gp.containsAllergens, gc.category, count(o) as timesOrdered
+ORDER BY timesOrdered DESC LIMIT 10;
+----
+
+=== Bad:
+* make assumptions about age, lifestage, needs (medical or otherwise) that are private
+* alter pricing or margins on products that are purchase staples, knowing customers will not sacrifice certain things
+* targeting customer demographics, influencing purchases
+
+== Scenario #3 - Tying content to qualifying data
+
+=== Good
+* accurate recommendations based on genre, ageCertification, and similar titles
+* notify releases of new episodes in shows customer has watched
+* calculate similarity to other customers for cross-selling, recommending, and appropriate marketing
+
+[source,cypher]
+----
+//Find customer preferences across genres, ageCerts, and titles
+MATCH (c:Customer)-[r:WATCHED]->(t:Title)-[r2]->(g:Genre)
+RETURN c.customerId, g.genre, t.ageCertification, collect(t.title)
+ORDER BY g.genre;
+----
+
+=== Bad
+* deduce whether children are in the household (in residence or home daycare)
+* track when certain films or genres are watched (late nights, during day)
+* connecting generational/demographic data and targeting based on those
+
+[source,cypher]
+----
+//Check how much content is child-friendly
+MATCH (c:Customer)-[r:WATCHED]->(t:Title)-[r2]->(g:Genre)
+WHERE g.genre = "Family"
+OR t.ageCertification IN ["TV-G","TV-Y7","TV-PG","G","PG"]
+RETURN t.ageCertification, count(DISTINCT t.title) as count, collect(DISTINCT g.genre)
+ORDER BY count DESC;
+----
