@@ -1,0 +1,11 @@
+= Wielding Data for Good and Evil
+
+This data is sourced from a few locations and pulled together for analysis in a graph database.
+
+* https://www.kaggle.com/datasets/ylchang/coffee-shop-sample-data-1113[Kaggle Coffee Shop data^]
+* https://www.kaggle.com/datasets/andrexibiza/grocery-sales-dataset[Grocery Sales Database^]
+* https://www.kaggle.com/datasets/victorsoeiro/netflix-tv-shows-and-movies[Kaggle Netflix data set^]
+
+== Data Model
+
+image:wielding-goodevil-data-model.png[]

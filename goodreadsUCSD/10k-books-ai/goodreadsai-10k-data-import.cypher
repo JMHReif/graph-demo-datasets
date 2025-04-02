@@ -28,14 +28,14 @@ CALL apoc.load.json("https://data.neo4j.com/goodreads/goodreads_books_10k.json")
 CALL (book) {
     MERGE (b:Book {id: book.book_id})
     SET b += apoc.map.clean(book, ['authors','similar_books','popular_shelves','series'],[""])
-} in transactions of 10000 rows;
+} IN TRANSACTIONS OF 10000 ROWS;
 
 //Import initial authors for 10k books
 CALL apoc.load.json("https://data.neo4j.com/goodreads/goodreads_books_10k.json") YIELD value as book
 CALL (book) {
     UNWIND book.authors as author
     MERGE (a:Author {author_id: author.author_id})
-} in transactions of 10000 rows;
+} IN TRANSACTIONS OF 10000 ROWS;
 
 //Hydrate Author nodes
 CALL apoc.periodic.iterate(
@@ -51,7 +51,7 @@ CALL (book) {
     UNWIND book.authors as author
     MATCH (a:Author {author_id: author.author_id})
     MERGE (a)-[w:AUTHORED]->(b)
-} in transactions of 10000 rows;
+} IN TRANSACTIONS OF 10000 ROWS;
 
 //Load similar books
 CALL apoc.load.json("https://data.neo4j.com/goodreads/goodreads_books_10k.json") YIELD value as book
@@ -61,20 +61,20 @@ CALL (book) {
     UNWIND book.similar_books as similarBookId
     MATCH (b2:Book {id: similarBookId})
     MERGE (b)-[r:SIMILAR_TO]->(b2)
-} in transactions of 10000 rows;
+} IN TRANSACTIONS OF 10000 ROWS;
 
 //Load Review nodes
 CALL apoc.load.json("https://data.neo4j.com/goodreads/goodreads_reviews_dedup.json.gz") YIELD value as review
 CALL (review) {
     MATCH (b:Book {id: review.book_id})
     MERGE (r:Review {id: review.review_id})
-} in transactions of 10000 rows;
+} IN TRANSACTIONS OF 10000 ROWS;
 
 //Hydrate Review properties
 CALL apoc.load.json("https://data.neo4j.com/goodreads/goodreads_reviews_dedup.json.gz") YIELD value as review
 CALL (review) {
     MATCH (r:Review {id: review.review_id}) SET r += apoc.map.clean(review, [],[""])
-} in transactions of 10000 rows;
+} IN TRANSACTIONS OF 10000 ROWS;
 
 //Load Review relationships
 CALL apoc.load.json("https://data.neo4j.com/goodreads/goodreads_reviews_dedup.json.gz") YIELD value as review
@@ -82,7 +82,7 @@ CALL (review) {
     MATCH (b:Book {id: review.book_id})
     MATCH (r:Review {id: review.review_id})
     MERGE (b)<-[rel:WRITTEN_FOR]-(r)
-} in transactions of 10000 rows;
+} IN TRANSACTIONS OF 10000 ROWS;
 
 //Clean up Book properties
 MATCH (b:Book)
@@ -90,7 +90,7 @@ CALL (b) {
      SET b.ratings_count = toInteger(b.ratings_count),
      b.text_reviews_count = toInteger(b.text_reviews_count),
      b.average_rating = toFloat(b.average_rating)
-} in transactions of 10000 rows;
+} IN TRANSACTIONS OF 10000 ROWS;
 
 //Create Review text property
 MATCH (r:Review)
@@ -98,7 +98,7 @@ MATCH (r:Review)
     AND r.text IS NULL
 CALL (r) {
      SET r.text = r.review_text
-} in transactions of 10000 rows;
+} IN TRANSACTIONS OF 10000 ROWS;
 
 //Clean up Review review_text property
 MATCH (r:Review)
@@ -106,7 +106,7 @@ MATCH (r:Review)
     AND r.text IS NOT NULL
 CALL (r) {
      REMOVE r.review_text
-} in transactions of 10000 rows;
+} IN TRANSACTIONS OF 10000 ROWS;
 
 //Create Book text property
 MATCH (b:Book)
@@ -114,7 +114,7 @@ MATCH (b:Book)
     AND b.text IS NULL
 CALL (b) {
      SET b.text = b.description
-} in transactions of 10000 rows;
+} IN TRANSACTIONS OF 10000 ROWS;
 
 //Clean up Book description property
 MATCH (b:Book)
@@ -122,7 +122,7 @@ MATCH (b:Book)
     AND b.text IS NOT NULL
 CALL (b) {
      REMOVE b.description
-} in transactions of 10000 rows;
+} IN TRANSACTIONS OF 10000 ROWS;
 
 //Clean up Review date_added property
 MATCH (r:Review)
@@ -130,7 +130,7 @@ MATCH (r:Review)
     AND apoc.meta.cypher.type(r.date_added) = "STRING"
 CALL (r) {
      SET r.date_added = datetime(apoc.date.convertFormat(r.date_added, 'EEE LLL dd HH:mm:ss Z yyyy', 'iso_offset_date_time'))
-} in transactions of 1000 rows;
+} IN TRANSACTIONS OF 1000 ROWS;
 
 //Clean up Review date_updated property
 MATCH (r:Review)
@@ -138,7 +138,7 @@ MATCH (r:Review)
     AND apoc.meta.cypher.type(r.date_updated) = "STRING"
 CALL (r) {
      SET r.date_updated = datetime(apoc.date.convertFormat(r.date_updated, 'EEE LLL dd HH:mm:ss Z yyyy', 'iso_offset_date_time'))
-} in transactions of 1000 rows;
+} IN TRANSACTIONS OF 1000 ROWS;
 
 //Clean up Review started_at property
 MATCH (r:Review)
@@ -146,7 +146,7 @@ WHERE r.started_at IS NOT NULL
     AND apoc.meta.cypher.type(r.started_at) = "STRING"
 CALL (r) {
      SET r.started_at = datetime(apoc.date.convertFormat(r.started_at, 'EEE LLL dd HH:mm:ss Z yyyy', 'iso_offset_date_time'))
-} in transactions of 1000 rows;
+} IN TRANSACTIONS OF 1000 ROWS;
 
 //Remove Review read_at problem properties (invalue year)
 MATCH (r:Review)
@@ -162,7 +162,7 @@ WHERE r.read_at IS NOT NULL
 AND apoc.meta.cypher.type(r.read_at) = "STRING"
 CALL (r) {
      SET r.read_at = datetime(apoc.date.convertFormat(r.read_at, 'EEE LLL dd HH:mm:ss Z yyyy', 'iso_offset_date_time'))
-} in transactions of 1000 rows;
+} IN TRANSACTIONS OF 1000 ROWS;
 
 //Separate User nodes from Review nodes
 MATCH (r:Review)
@@ -170,7 +170,7 @@ WHERE r.user_id IS NOT NULL
 CALL (r) {
     MERGE (u:User {user_id: r.user_id})
     MERGE (r)<-[:PUBLISHED]-(u)
-} in transactions of 1000 rows;
+} IN TRANSACTIONS OF 1000 ROWS;
 
 //Generate embeddings for Book nodes
 CALL apoc.periodic.iterate(
@@ -183,29 +183,29 @@ CALL apoc.periodic.iterate(
 YIELD batches, total, errorMessages
 RETURN batches, total, errorMessages;
 
-//Generate embeddings for Review nodes (batched by 1000, run multiple times)
-MATCH (r:Review WHERE r.text IS NOT NULL AND r.embedding IS NULL)
-LIMIT 1000
-WITH collect(r) AS reviewsList,
-     count(*) AS total,
-     100 AS batchSize
-UNWIND range(0, total-1, batchSize) AS batchStart
-CALL (reviewsList, batchStart, batchSize) {
-    WITH [review IN reviewsList[batchStart .. batchStart + batchSize] | review.text] AS batch
-    CALL genai.vector.encodeBatch(batch, 'OpenAI', { token: $token, model: "text-embedding-3-small" }) YIELD index, vector
-    CALL db.create.setNodeVectorProperty(reviewsList[batchStart + index], 'embedding', vector)
-} IN CONCURRENT TRANSACTIONS OF 1 ROW;
-// //Alternative (Christoff says it errors out after 16 batches?)
-// MATCH (r:Review)
-// WITH COUNT(r) AS total
-// UNWIND range(0, total-1, 100) AS batchStart
-// CALL() {
-//   MATCH (r:Review WHERE r.text IS NOT NULL AND r.embedding IS NULL)
-//   LIMIT 100
-//   WITH collect(r.text) AS batch, collect(r) AS reviewsList
-//   CALL genai.vector.encodeBatch(batch, "OpenAI", { token: $token, model: "text-embedding-3-small" }) YIELD index, vector
-//   CALL db.create.setNodeVectorProperty(reviewsList[index], "embedding", vector)
-// } IN TRANSACTIONS OF 1 ROW;
+//Generate embeddings for Review nodes
+MATCH (r:Review)
+WITH COUNT(r) AS total
+UNWIND range(0, total-1, 100) AS batchStart
+CALL() {
+  MATCH (r:Review WHERE r.text IS NOT NULL AND r.embedding IS NULL)
+  LIMIT 100
+  WITH collect(r.text) AS batch, collect(r) AS reviewsList
+  CALL genai.vector.encodeBatch(batch, "OpenAI", { token: $token, model: "text-embedding-3-small" }) YIELD index, vector
+  CALL db.create.setNodeVectorProperty(reviewsList[index], "embedding", vector)
+} IN TRANSACTIONS OF 1 ROW;
+// //Generate embeddings for Review nodes (batched by 1000, run multiple times)
+// MATCH (r:Review WHERE r.text IS NOT NULL AND r.embedding IS NULL)
+// LIMIT 1000
+// WITH collect(r) AS reviewsList,
+//      count(*) AS total,
+//      100 AS batchSize
+// UNWIND range(0, total-1, batchSize) AS batchStart
+// CALL (reviewsList, batchStart, batchSize) {
+//     WITH [review IN reviewsList[batchStart .. batchStart + batchSize] | review.text] AS batch
+//     CALL genai.vector.encodeBatch(batch, 'OpenAI', { token: $token, model: "text-embedding-3-small" }) YIELD index, vector
+//     CALL db.create.setNodeVectorProperty(reviewsList[batchStart + index], 'embedding', vector)
+// } IN CONCURRENT TRANSACTIONS OF 1 ROW;
 
 // To delete all the data:
 // // Delete all relationships 
