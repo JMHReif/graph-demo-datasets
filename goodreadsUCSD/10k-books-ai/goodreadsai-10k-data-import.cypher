@@ -174,10 +174,10 @@ CALL (r) {
 
 //Generate embeddings for Book nodes
 CALL apoc.periodic.iterate(
-    'MATCH (b:Book WHERE b.description IS NOT NULL AND b.embedding IS NULL)
+    'MATCH (b:Book WHERE b.text IS NOT NULL AND b.embedding IS NULL)
     RETURN b',
     'WITH collect(b) as books
-    CALL apoc.ml.openai.embedding([b in books | b.title+"\n"+b.description],$token,{model: "text-embedding-3-small"}) YIELD index, embedding
+    CALL apoc.ml.openai.embedding([b in books | b.title+"\n"+b.text],$token,{model: "text-embedding-3-small"}) YIELD index, embedding
     CALL db.create.setNodeVectorProperty(books[index], "embedding", embedding);',
     {batchSize:100, params:{token:$token}})
 YIELD batches, total, errorMessages
