@@ -8,9 +8,9 @@ This data is sourced from the https://business.yelp.com/data/resources/open-data
 
 == Data Model
 
-image:{img}/yelp-data-model.png[]
+image:yelp-data-model.png[]
 
-There is currently one size/rendition of data set available in this repository (but more can be added):
+There is currently one size/rendition of data set available in this repository (but you can customize business locations by tweaking the initial `WHERE` clause in the Cypher script):
 
 * `St. Louis` businesses - a subset of the full data set with businesses that have an address of `St. Louis`, `Saint Louis`, or `St Louis`.
 
