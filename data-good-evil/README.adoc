@@ -9,3 +9,9 @@ This data is sourced from a few locations and pulled together for analysis in a 
 == Data Model
 
 image:wielding-goodevil-data-model.png[]
+
+== Presentations
+
+PDF versions of accompanying presentations are published to SpeakerDeck.
+
+* https://speakerdeck.com/jmhreif/interpreting-data-wielding-data-for-good-and-evil-in-the-ai-era-81cf6a0f-ce66-47f2-92df-bc1bea1d0fda[KCDC 2025^]
