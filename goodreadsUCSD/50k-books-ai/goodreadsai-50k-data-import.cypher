@@ -3,8 +3,8 @@
 //586814 nodes
 //794616 relationships
 
-//Parameter for OpenAI API token
-:params {token:"<YOUR API KEY HERE>"}
+//Parameter for optional OpenAI API token
+:params {token:"<YOUR API KEY HERE>"};
 
 CREATE CONSTRAINT book_id IF NOT EXISTS FOR (b:Book) REQUIRE b.id IS UNIQUE;
 CREATE CONSTRAINT author_id IF NOT EXISTS FOR (a:Author) REQUIRE a.author_id IS UNIQUE;
@@ -27,17 +27,15 @@ OPTIONS {indexConfig: {
 
 //Load books
 CALL apoc.load.json("https://data.neo4j.com/goodreads/goodreads_books_50k.json") YIELD value as book
-CALL {
-    WITH book
+CALL (book) {
     MERGE (b:Book {id: book.book_id})
     SET b += apoc.map.clean(book, ['authors','similar_books','popular_shelves','series'],[""])
 } in transactions of 10000 rows;
 //50000 Book nodes
 
-//Import initial authors for 10k books
+//Import initial authors for 50k books
 CALL apoc.load.json("https://data.neo4j.com/goodreads/goodreads_books_50k.json") YIELD value as book
-CALL {
-    WITH book
+CALL (book) {
     UNWIND book.authors as author
     MERGE (a:Author {author_id: author.author_id})
 } in transactions of 10000 rows;
@@ -52,9 +50,8 @@ CALL apoc.periodic.iterate(
 
 //Load Author relationships
 CALL apoc.load.json("https://data.neo4j.com/goodreads/goodreads_books_50k.json") YIELD value as book
-CALL {
-    WITH book
-    MATCH (b:Book {book_id: book.book_id})
+CALL (book) {
+    MATCH (b:Book {id: book.book_id})
     WITH book, b
     UNWIND book.authors as author
     MATCH (a:Author {author_id: author.author_id})
@@ -64,9 +61,8 @@ CALL {
 
 //Load similar books
 CALL apoc.load.json("https://data.neo4j.com/goodreads/goodreads_books_50k.json") YIELD value as book
-CALL {
-    WITH book
-    MATCH (b:Book {book_id: book.book_id})
+CALL (book) {
+    MATCH (b:Book {id: book.book_id})
     WITH book, b
     WHERE book.similar_books IS NOT NULL
     UNWIND book.similar_books as similarBookId
@@ -77,9 +73,8 @@ CALL {
 
 //Load Reviews
 CALL apoc.load.json("https://data.neo4j.com/goodreads/goodreads_reviews_dedup.json.gz") YIELD value as review
-CALL { 
-    WITH review
-    MATCH (b:Book) WHERE b.book_id = review.book_id
+CALL (review) {
+    MATCH (b:Book) WHERE b.id = review.book_id
     WITH review, b
     MERGE (r:Review {id: review.review_id}) SET r += apoc.map.clean(review, [],[""])
     WITH b, r
@@ -89,8 +84,7 @@ CALL {
 
 //Clean up Book properties
 MATCH (b:Book)
-CALL {
-    WITH b
+CALL (b) {
      SET b.ratings_count = toInteger(b.ratings_count),
      b.text_reviews_count = toInteger(b.text_reviews_count),
      b.average_rating = toFloat(b.average_rating)
@@ -100,8 +94,7 @@ CALL {
 MATCH (r:Review)
     WHERE r.review_text IS NOT NULL
     AND r.text IS NULL
-CALL {
-    WITH r
+CALL (r) {
      SET r.text = r.review_text
 } in transactions of 10000 rows;
 
@@ -109,8 +102,7 @@ CALL {
 MATCH (r:Review)
     WHERE r.review_text IS NOT NULL
     AND r.text IS NOT NULL
-CALL {
-    WITH r
+CALL (r) {
      REMOVE r.review_text
 } in transactions of 10000 rows;
 
@@ -118,8 +110,7 @@ CALL {
 MATCH (b:Book)
     WHERE b.description IS NOT NULL
     AND b.text IS NULL
-CALL {
-    WITH b
+CALL (b) {
      SET b.text = b.description
 } in transactions of 10000 rows;
 
@@ -127,8 +118,7 @@ CALL {
 MATCH (b:Book)
     WHERE b.description IS NOT NULL
     AND b.text IS NOT NULL
-CALL {
-    WITH b
+CALL (b) {
      REMOVE b.description
 } in transactions of 10000 rows;
 
@@ -136,8 +126,7 @@ CALL {
 MATCH (r:Review)
     WHERE r.date_added IS NOT NULL
     AND apoc.meta.cypher.type(r.date_added) = "STRING"
-CALL {
-    WITH r
+CALL (r) {
      SET r.date_added = datetime(apoc.date.convertFormat(r.date_added, 'EEE LLL dd HH:mm:ss Z yyyy', 'iso_offset_date_time'))
 } in transactions of 1000 rows;
 
@@ -145,8 +134,7 @@ CALL {
 MATCH (r:Review)
     WHERE r.date_updated IS NOT NULL
     AND apoc.meta.cypher.type(r.date_updated) = "STRING"
-CALL {
-    WITH r
+CALL (r) {
      SET r.date_updated = datetime(apoc.date.convertFormat(r.date_updated, 'EEE LLL dd HH:mm:ss Z yyyy', 'iso_offset_date_time'))
 } in transactions of 1000 rows;
 
@@ -154,8 +142,7 @@ CALL {
 MATCH (r:Review)
 WHERE r.started_at IS NOT NULL
     AND apoc.meta.cypher.type(r.started_at) = "STRING"
-CALL {
-    WITH r
+CALL (r) {
      SET r.started_at = datetime(apoc.date.convertFormat(r.started_at, 'EEE LLL dd HH:mm:ss Z yyyy', 'iso_offset_date_time'))
 } in transactions of 1000 rows;
 
@@ -172,41 +159,49 @@ RETURN count(r);
 MATCH (r:Review)
 WHERE r.read_at IS NOT NULL
 AND apoc.meta.cypher.type(r.read_at) = "STRING"
-CALL {
-    WITH r
+CALL (r) {
      SET r.read_at = datetime(apoc.date.convertFormat(r.read_at, 'EEE LLL dd HH:mm:ss Z yyyy', 'iso_offset_date_time'))
 } in transactions of 1000 rows;
 
 //Separate User nodes from Review nodes
 MATCH (r:Review)
 WHERE r.user_id IS NOT NULL
-CALL {
-    WITH r
+CALL (r) {
     MERGE (u:User {user_id: r.user_id})
     WITH r, u
     MERGE (r)<-[:PUBLISHED]-(u)
 } in transactions of 1000 rows;
 //127751 User nodes added
 
-//Generate embeddings for Book nodes
+//Generate embeddings for Book nodes (Ollama)
 CALL apoc.periodic.iterate(
-    'MATCH (b:Book WHERE b.description IS NOT NULL AND b.embedding IS NULL)
+    'MATCH (b:Book WHERE b.text IS NOT NULL AND b.embedding IS NULL)
     RETURN b',
     'WITH collect(b) as books
-    CALL apoc.ml.openai.embedding([b in books | b.title+"\n"+b.description],$token) YIELD index, embedding
+    CALL apoc.ml.openai.embedding([b in books | b.title+"\n"+b.text], null,{endpoint: "http://localhost:11434", model: "mistral"}) YIELD index, embedding
     CALL db.create.setNodeVectorProperty(books[index], "embedding", embedding);',
-    {batchSize:100, params:{token:$token}})
+    {batchSize:100})
 YIELD batches, total, errorMessages
 RETURN batches, total, errorMessages;
+//Using OpenAI...
+// CALL apoc.periodic.iterate(
+//     'MATCH (b:Book WHERE b.text IS NOT NULL AND b.embedding IS NULL)
+//     RETURN b',
+//     'WITH collect(b) as books
+//     CALL apoc.ml.openai.embedding([b in books | b.title+"\n"+b.text],$token) YIELD index, embedding
+//     CALL db.create.setNodeVectorProperty(books[index], "embedding", embedding);',
+//     {batchSize:100, params:{token:$token}})
+// YIELD batches, total, errorMessages
+// RETURN batches, total, errorMessages;
 
-//Generate embeddings for Review nodes
+//Generate embeddings for Review nodes (Ollama)
 CALL apoc.periodic.iterate(
     'MATCH (r:Review WHERE r.text IS NOT NULL AND r.embedding IS NULL)
     RETURN r',
     'WITH collect(r) as reviews
-    CALL apoc.ml.openai.embedding([r in reviews | r.text],$token) YIELD index, embedding
+    CALL apoc.ml.openai.embedding([r in reviews | r.text],null,{endpoint: "http://localhost:11434", model: "mistral"}) YIELD index, embedding
     CALL db.create.setNodeVectorProperty(reviews[index], "embedding", embedding);',
-    {batchSize:100, params:{token:$token}})
+    {batchSize:100})
 YIELD batches, total, errorMessages
 RETURN batches, total, errorMessages;
 
