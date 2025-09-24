@@ -4,7 +4,7 @@
 //794616 relationships
 
 //Parameter for optional OpenAI API token
-:params {token:"<YOUR API KEY HERE>"};
+// :params {token:"<YOUR API KEY HERE>"};
 
 CREATE CONSTRAINT book_id IF NOT EXISTS FOR (b:Book) REQUIRE b.id IS UNIQUE;
 CREATE CONSTRAINT author_id IF NOT EXISTS FOR (a:Author) REQUIRE a.author_id IS UNIQUE;
@@ -66,7 +66,7 @@ CALL (book) {
     WITH book, b
     WHERE book.similar_books IS NOT NULL
     UNWIND book.similar_books as similarBookId
-    MATCH (b2:Book {book_id: similarBookId})
+    MATCH (b2:Book {id: similarBookId})
     MERGE (b)-[r:SIMILAR_TO]->(b2)
 } in transactions of 10000 rows;
 //7911 SIMILAR_TO relationships
@@ -178,7 +178,7 @@ CALL apoc.periodic.iterate(
     'MATCH (b:Book WHERE b.text IS NOT NULL AND b.embedding IS NULL)
     RETURN b',
     'WITH collect(b) as books
-    CALL apoc.ml.openai.embedding([b in books | b.title+"\n"+b.text], null,{endpoint: "http://localhost:11434", model: "mistral"}) YIELD index, embedding
+    CALL apoc.ml.openai.embedding([b in books | b.title+"\n"+b.text], "<apiKey>",{endpoint: "http://localhost:11434/v1", model: "mistral"}) YIELD index, embedding
     CALL db.create.setNodeVectorProperty(books[index], "embedding", embedding);',
     {batchSize:100})
 YIELD batches, total, errorMessages
@@ -199,11 +199,21 @@ CALL apoc.periodic.iterate(
     'MATCH (r:Review WHERE r.text IS NOT NULL AND r.embedding IS NULL)
     RETURN r',
     'WITH collect(r) as reviews
-    CALL apoc.ml.openai.embedding([r in reviews | r.text],null,{endpoint: "http://localhost:11434", model: "mistral"}) YIELD index, embedding
+    CALL apoc.ml.openai.embedding([r in reviews | r.text],"<apiKey>",{endpoint: "http://localhost:11434/v1", model: "mistral"}) YIELD index, embedding
     CALL db.create.setNodeVectorProperty(reviews[index], "embedding", embedding);',
     {batchSize:100})
 YIELD batches, total, errorMessages
 RETURN batches, total, errorMessages;
+//Generate embeddings for Review nodes (OpenAI)
+// CALL apoc.periodic.iterate(
+//     'MATCH (r:Review WHERE r.text IS NOT NULL AND r.embedding IS NULL)
+//     RETURN r',
+//     'WITH collect(r) as reviews
+//     CALL apoc.ml.openai.embedding([r in reviews | r.text],$token) YIELD index, embedding
+//     CALL db.create.setNodeVectorProperty(reviews[index], "embedding", embedding);',
+//     {batchSize:100, params:{token:$token}})
+// YIELD batches, total, errorMessages
+// RETURN batches, total, errorMessages;
 
 // To delete all the data:
 // // Delete all relationships 
