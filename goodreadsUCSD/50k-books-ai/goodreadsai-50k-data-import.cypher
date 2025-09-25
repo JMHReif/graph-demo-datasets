@@ -184,15 +184,16 @@ CALL apoc.periodic.iterate(
 YIELD batches, total, errorMessages
 RETURN batches, total, errorMessages;
 //Using OpenAI...
-// CALL apoc.periodic.iterate(
-//     'MATCH (b:Book WHERE b.text IS NOT NULL AND b.embedding IS NULL)
-//     RETURN b',
-//     'WITH collect(b) as books
-//     CALL apoc.ml.openai.embedding([b in books | b.title+"\n"+b.text],$token) YIELD index, embedding
-//     CALL db.create.setNodeVectorProperty(books[index], "embedding", embedding);',
-//     {batchSize:100, params:{token:$token}})
-// YIELD batches, total, errorMessages
-// RETURN batches, total, errorMessages;
+// MATCH (b:Book WHERE b.text IS NOT NULL AND b.embedding IS NULL)
+// WITH COUNT(b) AS total
+// UNWIND range(0, total-1, 100) AS batchStart
+// CALL() {
+//   MATCH (b:Book WHERE b.text IS NOT NULL AND b.embedding IS NULL)
+//   LIMIT 100
+//   WITH collect(b.text) AS batch, collect(b) AS bookList
+//   CALL genai.vector.encodeBatch(batch, "OpenAI", { token: $token, model: "text-embedding-3-small" }) YIELD index, vector
+//   CALL db.create.setNodeVectorProperty(bookList[index], "embedding", vector)
+// } IN TRANSACTIONS OF 100 ROWS;
 
 //Generate embeddings for Review nodes (Ollama)
 CALL apoc.periodic.iterate(
@@ -205,15 +206,16 @@ CALL apoc.periodic.iterate(
 YIELD batches, total, errorMessages
 RETURN batches, total, errorMessages;
 //Generate embeddings for Review nodes (OpenAI)
-// CALL apoc.periodic.iterate(
-//     'MATCH (r:Review WHERE r.text IS NOT NULL AND r.embedding IS NULL)
-//     RETURN r',
-//     'WITH collect(r) as reviews
-//     CALL apoc.ml.openai.embedding([r in reviews | r.text],$token) YIELD index, embedding
-//     CALL db.create.setNodeVectorProperty(reviews[index], "embedding", embedding);',
-//     {batchSize:100, params:{token:$token}})
-// YIELD batches, total, errorMessages
-// RETURN batches, total, errorMessages;
+// MATCH (r:Review WHERE r.text IS NOT NULL AND r.embedding IS NULL)
+// WITH COUNT(r) AS total
+// UNWIND range(0, total-1, 100) AS batchStart
+// CALL() {
+//   MATCH (r:Review WHERE r.text IS NOT NULL AND r.embedding IS NULL)
+//   LIMIT 100
+//   WITH collect(r.text) AS batch, collect(r) AS reviewsList
+//   CALL genai.vector.encodeBatch(batch, "OpenAI", { token: $token, model: "text-embedding-3-small" }) YIELD index, vector
+//   CALL db.create.setNodeVectorProperty(reviewsList[index], "embedding", vector)
+// } IN TRANSACTIONS OF 100 ROWS;
 
 // To delete all the data:
 // // Delete all relationships 

@@ -173,18 +173,19 @@ CALL (r) {
 } IN TRANSACTIONS OF 1000 ROWS;
 
 //Generate embeddings for Book nodes
-CALL apoc.periodic.iterate(
-    'MATCH (b:Book WHERE b.text IS NOT NULL AND b.embedding IS NULL)
-    RETURN b',
-    'WITH collect(b) as books
-    CALL apoc.ml.openai.embedding([b in books | b.title+"\n"+b.text],$token,{model: "text-embedding-3-small"}) YIELD index, embedding
-    CALL db.create.setNodeVectorProperty(books[index], "embedding", embedding);',
-    {batchSize:100, params:{token:$token}})
-YIELD batches, total, errorMessages
-RETURN batches, total, errorMessages;
+MATCH (b:Book WHERE b.text IS NOT NULL AND b.embedding IS NULL)
+WITH COUNT(b) AS total
+UNWIND range(0, total-1, 100) AS batchStart
+CALL() {
+  MATCH (b:Book WHERE b.text IS NOT NULL AND b.embedding IS NULL)
+  LIMIT 100
+  WITH collect(b.text) AS batch, collect(b) AS bookList
+  CALL genai.vector.encodeBatch(batch, "OpenAI", { token: $token, model: "text-embedding-3-small" }) YIELD index, vector
+  CALL db.create.setNodeVectorProperty(bookList[index], "embedding", vector)
+} IN TRANSACTIONS OF 100 ROWS;
 
 //Generate embeddings for Review nodes
-MATCH (r:Review)
+MATCH (r:Review WHERE r.text IS NOT NULL AND r.embedding IS NULL)
 WITH COUNT(r) AS total
 UNWIND range(0, total-1, 100) AS batchStart
 CALL() {
@@ -193,7 +194,7 @@ CALL() {
   WITH collect(r.text) AS batch, collect(r) AS reviewsList
   CALL genai.vector.encodeBatch(batch, "OpenAI", { token: $token, model: "text-embedding-3-small" }) YIELD index, vector
   CALL db.create.setNodeVectorProperty(reviewsList[index], "embedding", vector)
-} IN TRANSACTIONS OF 1 ROW;
+} IN TRANSACTIONS OF 100 ROWS;
 // //Generate embeddings for Review nodes (batched by 1000, run multiple times)
 // MATCH (r:Review WHERE r.text IS NOT NULL AND r.embedding IS NULL)
 // LIMIT 1000
