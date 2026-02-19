@@ -4,7 +4,7 @@
 //794616 relationships
 
 //Parameter for optional OpenAI API token
-// :params {token:"<YOUR API KEY HERE>"};
+:params {token:"<YOUR API KEY HERE>"};
 
 CREATE CONSTRAINT book_id IF NOT EXISTS FOR (b:Book) REQUIRE b.id IS UNIQUE;
 CREATE CONSTRAINT author_id IF NOT EXISTS FOR (a:Author) REQUIRE a.author_id IS UNIQUE;
@@ -173,49 +173,57 @@ CALL (r) {
 } in transactions of 1000 rows;
 //127751 User nodes added
 
-//Generate embeddings for Book nodes (Ollama)
-CALL apoc.periodic.iterate(
-    'MATCH (b:Book WHERE b.text IS NOT NULL AND b.embedding IS NULL)
-    RETURN b',
-    'WITH collect(b) as books
-    CALL apoc.ml.openai.embedding([b in books | b.title+"\n"+b.text], "<apiKey>",{endpoint: "http://localhost:11434/v1", model: "mistral"}) YIELD index, embedding
-    CALL db.create.setNodeVectorProperty(books[index], "embedding", embedding);',
-    {batchSize:100})
-YIELD batches, total, errorMessages
-RETURN batches, total, errorMessages;
-//Using OpenAI...
-// MATCH (b:Book WHERE b.text IS NOT NULL AND b.embedding IS NULL)
-// WITH COUNT(b) AS total
-// UNWIND range(0, total-1, 100) AS batchStart
-// CALL() {
-//   MATCH (b:Book WHERE b.text IS NOT NULL AND b.embedding IS NULL)
-//   LIMIT 100
-//   WITH collect(b.text) AS batch, collect(b) AS bookList
-//   CALL genai.vector.encodeBatch(batch, "OpenAI", { token: $token, model: "text-embedding-3-small" }) YIELD index, vector
-//   CALL db.create.setNodeVectorProperty(bookList[index], "embedding", vector)
-// } IN TRANSACTIONS OF 100 ROWS;
+//Generate embeddings for Book nodes (OpenAI)
+CYPHER 25
+MATCH (b:Book)
+WHERE b.text IS NOT NULL 
+AND b.embedding IS NULL
+AND b.title IS NOT NULL
+CALL (b) {
+    WITH b, substring(b.title+"\n"+b.text,0,1000) as bookText
+    WITH ai.text.embed(bookText, 'openai', 
+        { token: $token, model: 'text-embedding-3-small' }) as vector
+    SET b.embedding = vector
+} IN TRANSACTIONS OF 5 ROWS
+ON ERROR CONTINUE;
+//Using Ollama...
+// CYPHER 25
+// MATCH (b:Book)
+// WHERE b.text IS NOT NULL 
+// AND b.embedding IS NULL
+// AND b.title IS NOT NULL
+// CALL (b) {
+//     WITH b, substring(b.title+"\n"+b.text,0,1000) as bookText
+//     WITH ai.text.embed(bookText, 'openai', 
+//         { token: "", model: 'nomic-embed-text:latest', vendorOptions: { dimensions: 768 } }) as vector
+//     SET b.embedding = vector
+// } IN TRANSACTIONS OF 5 ROWS
+// ON ERROR CONTINUE;
 
-//Generate embeddings for Review nodes (Ollama)
-CALL apoc.periodic.iterate(
-    'MATCH (r:Review WHERE r.text IS NOT NULL AND r.embedding IS NULL)
-    RETURN r',
-    'WITH collect(r) as reviews
-    CALL apoc.ml.openai.embedding([r in reviews | r.text],"<apiKey>",{endpoint: "http://localhost:11434/v1", model: "mistral"}) YIELD index, embedding
-    CALL db.create.setNodeVectorProperty(reviews[index], "embedding", embedding);',
-    {batchSize:100})
-YIELD batches, total, errorMessages
-RETURN batches, total, errorMessages;
 //Generate embeddings for Review nodes (OpenAI)
-// MATCH (r:Review WHERE r.text IS NOT NULL AND r.embedding IS NULL)
-// WITH COUNT(r) AS total
-// UNWIND range(0, total-1, 100) AS batchStart
-// CALL() {
-//   MATCH (r:Review WHERE r.text IS NOT NULL AND r.embedding IS NULL)
-//   LIMIT 100
-//   WITH collect(r.text) AS batch, collect(r) AS reviewsList
-//   CALL genai.vector.encodeBatch(batch, "OpenAI", { token: $token, model: "text-embedding-3-small" }) YIELD index, vector
-//   CALL db.create.setNodeVectorProperty(reviewsList[index], "embedding", vector)
-// } IN TRANSACTIONS OF 100 ROWS;
+CYPHER 25
+MATCH (r:Review)
+WHERE r.text IS NOT NULL 
+AND r.embedding IS NULL
+CALL (r) {
+    WITH r, substring(r.text,0,1000) as reviewText
+    WITH ai.text.embed(reviewText, 'openai', 
+        { token: $token, model: 'text-embedding-3-small' }) as vector
+    SET r.embedding = vector
+} IN TRANSACTIONS OF 5 ROWS
+ON ERROR CONTINUE;
+//Generate embeddings for Review nodes (Ollama)
+// CYPHER 25
+// MATCH (r:Review)
+// WHERE r.text IS NOT NULL 
+// AND r.embedding IS NULL
+// CALL (r) {
+//     WITH r, substring(r.text,0,1000) as reviewText
+//     WITH ai.text.embed(reviewText, 'openai', 
+//         { token: "", model: 'nomic-embed-text:latest', vendorOptions: { dimensions: 768 } }) as vector
+//     SET r.embedding = vector
+// } IN TRANSACTIONS OF 5 ROWS
+// ON ERROR CONTINUE;
 
 // To delete all the data:
 // // Delete all relationships 

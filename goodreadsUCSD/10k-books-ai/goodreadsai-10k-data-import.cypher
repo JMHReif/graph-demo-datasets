@@ -173,40 +173,31 @@ CALL (r) {
 } IN TRANSACTIONS OF 1000 ROWS;
 
 //Generate embeddings for Book nodes
-MATCH (b:Book WHERE b.text IS NOT NULL AND b.embedding IS NULL)
-WITH COUNT(b) AS total
-UNWIND range(0, total-1, 100) AS batchStart
-CALL() {
-  MATCH (b:Book WHERE b.text IS NOT NULL AND b.embedding IS NULL)
-  LIMIT 100
-  WITH collect(b.text) AS batch, collect(b) AS bookList
-  CALL genai.vector.encodeBatch(batch, "OpenAI", { token: $token, model: "text-embedding-3-small" }) YIELD index, vector
-  CALL db.create.setNodeVectorProperty(bookList[index], "embedding", vector)
-} IN TRANSACTIONS OF 100 ROWS;
+CYPHER 25
+MATCH (b:Book)
+WHERE b.text IS NOT NULL 
+AND b.embedding IS NULL
+AND b.title IS NOT NULL
+CALL (b) {
+    WITH b, substring(b.title+"\n"+b.text,0,1000) as bookText
+    WITH ai.text.embed(bookText, 'openai', 
+        { token: $token, model: 'text-embedding-3-small' }) as vector
+    SET b.embedding = vector
+} IN TRANSACTIONS OF 5 ROWS
+ON ERROR CONTINUE;
 
 //Generate embeddings for Review nodes
-MATCH (r:Review WHERE r.text IS NOT NULL AND r.embedding IS NULL)
-WITH COUNT(r) AS total
-UNWIND range(0, total-1, 100) AS batchStart
-CALL() {
-  MATCH (r:Review WHERE r.text IS NOT NULL AND r.embedding IS NULL)
-  LIMIT 100
-  WITH collect(r.text) AS batch, collect(r) AS reviewsList
-  CALL genai.vector.encodeBatch(batch, "OpenAI", { token: $token, model: "text-embedding-3-small" }) YIELD index, vector
-  CALL db.create.setNodeVectorProperty(reviewsList[index], "embedding", vector)
-} IN TRANSACTIONS OF 100 ROWS;
-// //Generate embeddings for Review nodes (batched by 1000, run multiple times)
-// MATCH (r:Review WHERE r.text IS NOT NULL AND r.embedding IS NULL)
-// LIMIT 1000
-// WITH collect(r) AS reviewsList,
-//      count(*) AS total,
-//      100 AS batchSize
-// UNWIND range(0, total-1, batchSize) AS batchStart
-// CALL (reviewsList, batchStart, batchSize) {
-//     WITH [review IN reviewsList[batchStart .. batchStart + batchSize] | review.text] AS batch
-//     CALL genai.vector.encodeBatch(batch, 'OpenAI', { token: $token, model: "text-embedding-3-small" }) YIELD index, vector
-//     CALL db.create.setNodeVectorProperty(reviewsList[batchStart + index], 'embedding', vector)
-// } IN CONCURRENT TRANSACTIONS OF 1 ROW;
+CYPHER 25
+MATCH (r:Review)
+WHERE r.text IS NOT NULL 
+AND r.embedding IS NULL
+CALL (r) {
+    WITH r, substring(r.text,0,1000) as reviewText
+    WITH ai.text.embed(reviewText, 'openai', 
+        { token: $token, model: 'text-embedding-3-small' }) as vector
+    SET r.embedding = vector
+} IN TRANSACTIONS OF 5 ROWS
+ON ERROR CONTINUE;
 
 // To delete all the data:
 // // Delete all relationships 
